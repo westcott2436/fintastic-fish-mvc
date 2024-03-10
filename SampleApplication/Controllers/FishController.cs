@@ -105,22 +105,22 @@ namespace SampleApplication.Controllers
                 return NotFound();
             }
 
-            var fishEntitie = await _context.Fish.FindAsync(id);
-            if (fishEntitie == null)
+            var fishEntity = await _context.Fish.FindAsync(id);
+            if (fishEntity == null)
             {
                 return NotFound();
             }
             var model = new FishModel()
             {
-                AggressionLevel = fishEntitie.AggressionLevel,
-                Cost = fishEntitie.Cost,
-                CountryId = fishEntitie.CountryId,
-                Name = fishEntitie.Name,
-                Stock = fishEntitie.Stock,
-                WaterTypeId = fishEntitie.WaterTypeId
+                AggressionLevel = fishEntity.AggressionLevel,
+                Cost = fishEntity.Cost,
+                CountryId = fishEntity.CountryId,
+                Name = fishEntity.Name,
+                Stock = fishEntity.Stock,
+                WaterTypeId = fishEntity.WaterTypeId
             };
             
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fishEntitie.CountryId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fishEntity.CountryId);
             return View(model);
         }
 
