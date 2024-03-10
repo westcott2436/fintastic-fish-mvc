@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SampleApplication.Entities;
+using FintasticFish.Data.Entities;
 using SampleApplication.Models;
+using FintasticFish.Data;
 
 namespace SampleApplication.Controllers
 {
@@ -22,7 +23,16 @@ namespace SampleApplication.Controllers
         // GET: Fish
         public async Task<IActionResult> Index()
         {
-            var fintasticFishContext = _context.Fish.Include(f => f.Country);
+            var fintasticFishContext = _context.Fish.Include(f => f.Country)
+                                                    .Select(f => new FishModel() 
+                                                    {
+                                                     Cost = f.Cost,
+                                                     CountryId = f.CountryId,
+                                                     FishId = f.FishId,
+                                                     Name = f.Name,
+                                                     Stock = f.Stock,
+                                                     WaterTypeId = f.WaterTypeId,
+                                                    }); 
             return View(await fintasticFishContext.ToListAsync());
         }
 
@@ -36,6 +46,15 @@ namespace SampleApplication.Controllers
             
             var fish = await _context.Fish
                 .Include(f => f.Country)
+                .Select(f => new FishModel()
+                {
+                    Cost = f.Cost,
+                    CountryId = f.CountryId,
+                    FishId = f.FishId,
+                    Name = f.Name,
+                    Stock = f.Stock,
+                    WaterTypeId = f.WaterTypeId,
+                })
                 .FirstOrDefaultAsync(m => m.FishId == id);
             if (fish == null)
             {
@@ -86,13 +105,23 @@ namespace SampleApplication.Controllers
                 return NotFound();
             }
 
-            var fish = await _context.Fish.FindAsync(id);
-            if (fish == null)
+            var fishEntitie = await _context.Fish.FindAsync(id);
+            if (fishEntitie == null)
             {
                 return NotFound();
             }
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fish.CountryId);
-            return View(fish);
+            var model = new FishModel()
+            {
+                AggressionLevel = fishEntitie.AggressionLevel,
+                Cost = fishEntitie.Cost,
+                CountryId = fishEntitie.CountryId,
+                Name = fishEntitie.Name,
+                Stock = fishEntitie.Stock,
+                WaterTypeId = fishEntitie.WaterTypeId
+            };
+            
+            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fishEntitie.CountryId);
+            return View(model);
         }
 
         // POST: Fish/Edit/5
@@ -100,6 +129,8 @@ namespace SampleApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        //TODO: Find location of use and fix entities/models issue.
         public async Task<IActionResult> Edit(int id, [Bind("FishId,Name,Cost,Stock,WaterTypeId,AggressionLevel,CountryId")] Fish fish)
         {
             if (id != fish.FishId)
@@ -141,6 +172,16 @@ namespace SampleApplication.Controllers
 
             var fish = await _context.Fish
                 .Include(f => f.Country)
+                .Select(f => new FishModel()
+                {
+                    AggressionLevel = f.AggressionLevel,
+                    Cost = f.Cost,
+                    CountryId = f.CountryId,
+                    FishId = f.FishId,
+                    Name = f.Name,
+                    Stock = f.Stock,
+                    WaterTypeId = f.WaterTypeId,
+                })
                 .FirstOrDefaultAsync(m => m.FishId == id);
             if (fish == null)
             {

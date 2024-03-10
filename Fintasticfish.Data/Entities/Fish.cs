@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SampleApplication.Entities;
+namespace FintasticFish.Data.Entities;
 
 public partial class Fish
 {
