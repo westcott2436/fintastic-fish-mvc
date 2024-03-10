@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SampleApplication.Entities;
+using FintasticFish.Data;
 
 namespace SampleApplication
 {
