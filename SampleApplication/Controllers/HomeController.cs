@@ -19,11 +19,6 @@ namespace SampleApplication.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Contact()
         {
             _logger.LogInformation("We have entered the home controller page going to contact view");
