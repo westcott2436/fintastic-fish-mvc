@@ -28,8 +28,9 @@ public partial class FintasticFishContext : DbContext
 
     public virtual DbSet<WaterType> WaterTypes { get; set; }
 
+    //TODO: Figure out why named configuration string are not working 2 locations.
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:LocalDB");
+        => optionsBuilder.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
