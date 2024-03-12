@@ -26,13 +26,19 @@
             @Html.DisplayNameFor(model => model.Cost)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cost)
+            @{
+                var cost = String.Format("{0:C}", Model.Cost);
+            }
+            @cost
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FoodTypeId)
+            Food Type
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FoodTypeId)
+            @{
+                var foodtype = (SampleApplication.Enumerations.FoodType)Model.FoodTypeId;
+            }
+            @foodtype
         </dd>
     </dl>
 </div>

@@ -28,21 +28,31 @@
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WaterTypeId" class="control-label"></label>
-                <input asp-for="WaterTypeId" class="form-control" />
-                <span asp-validation-for="WaterTypeId" class="text-danger"></span>
+                <label asp-for="WaterTypeId" class="control-label">Water Type</label>
+
+                @* testing for drop down to show a picker *@
+                @* <input asp-for="WaterTypeId" class="form-control" /> *@
+                @* <select asp-for="WaterTypeId" class="form-control" asp-items="ViewBag.WaterTypeId"></select>
+                <span asp-validation-for="WaterTypeId" class="text-danger"></span> *@
+                <select asp-for="WaterTypeId" class="form-control"
+                        asp-items="ViewBag.WaterTypeId"
+                        id="WaterTypeId">  </select>
             </div>
             <div class="form-group">
-                <label asp-for="AggressionLevel" class="control-label"></label>
-                <input asp-for="AggressionLevel" class="form-control" />
-                <span asp-validation-for="AggressionLevel" class="text-danger"></span>
+                <label asp-for="AggressionLevel" class="control-label">Aggression Level</label>
+                @* testing for drop down to show a picker *@
+                @* <input asp-for="AggressionLevel" class="form-control" />
+                <span asp-validation-for="AggressionLevel" class="text-danger"></span> *@
+                <select asp-for="AggressionLevel" class="form-control"
+                        asp-items="ViewBag.AggressionLevel"
+                        id="AggressionLevel">  </select>
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
+                <label asp-for="CountryId" class="control-label">Native Country</label>
                 <select asp-for="CountryId" class ="form-control" asp-items="ViewBag.CountryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" style="margin-top:1em;"/>
             </div>
         </form>
     </div>

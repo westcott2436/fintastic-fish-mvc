@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Cost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FoodTypeId)
+                Food Type
             </th>
             <th></th>
         </tr>
@@ -37,10 +37,13 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cost)
+                $@Html.DisplayFor(modelItem => item.Cost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FoodTypeId)
+                    @{
+                        var foodtype = (SampleApplication.Enumerations.Countries)item.FoodTypeId;
+                    }
+                    @foodtype
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.FoodId">Edit</a> |

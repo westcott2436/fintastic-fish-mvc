@@ -20,7 +20,10 @@
             @Html.DisplayNameFor(model => model.Cost)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cost)
+            @{
+                var cost = String.Format("{0:C}", Model.Cost);
+            }
+            @cost
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Stock)
@@ -29,22 +32,34 @@
             @Html.DisplayFor(model => model.Stock)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WaterTypeId)
+            Water Type
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WaterTypeId)
+            @{
+                var waterType = (SampleApplication.Enumerations.WaterTypes)Model.WaterTypeId;
+            }
+            @waterType
+            @* @Html.DisplayFor(model => model.WaterTypeId) *@
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AggressionLevel)
+            Aggression Level
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AggressionLevel)
+            @{
+                var aggressionlevel = (SampleApplication.Enumerations.Aggression)Model.AggressionLevel;
+            }
+            @aggressionlevel
+            @* @Html.DisplayFor(model => model.AggressionLevel) *@
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CountryId)
+            Native Country
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CountryId)
+            @{
+                var country = (SampleApplication.Enumerations.Countries)Model.CountryId;
+            }
+            @country
+            @* @Html.DisplayFor(model => model.CountryId) *@
         </dd>
     </dl>
 </div>

@@ -46,6 +46,31 @@ namespace SampleApplication.Controllers
         // GET: Foods/Create
         public IActionResult Create()
         {
+
+            //var values = Enum.GetValues(typeof(SampleApplication.Enumerations.Food))
+            //                 .Cast<Enum>()
+            var values = _context.FoodTypes
+                                 .Select(entity => new SelectListItem
+                                 {
+                                     Text = entity.Name,
+                                     Value = entity.FoodTypeId.ToString()
+                                 }).ToList();
+            
+            
+            //foreach (var val in values) {
+            //    selects.Add(new SelectListItem()
+            //    {
+            //        Text = val.ToString(),
+            //        Value = 
+            //    });
+            //}
+            //for (int i = 0; i < values.Length; i++) {
+            //    selects.Add(new SelectListItem()
+            //    {
+            //        Text = values[i].ToString(),
+            //    });
+            //}
+            ViewData["FoodTypeData"] = values;
             return View();
         }
 
@@ -56,6 +81,9 @@ namespace SampleApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FoodId,Name,Stock,Cost,FoodTypeId")] Food food)
         {
+            //var values = Enum.GetValues(typeof(SampleApplication.Enumerations.Food));
+            var values = _context.FoodTypes.ToList();
+            ViewData["FoodTypeData"] = values;
             if (ModelState.IsValid)
             {
                 _context.Add(food);

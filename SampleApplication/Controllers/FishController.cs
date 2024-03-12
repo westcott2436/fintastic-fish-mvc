@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using FintasticFish.Data.Entities;
 using SampleApplication.Models;
 using FintasticFish.Data;
+using Newtonsoft.Json.Linq;
+using System.Transactions;
 
 namespace SampleApplication.Controllers
 {
@@ -67,8 +69,33 @@ namespace SampleApplication.Controllers
         // GET: Fish/Create
         public IActionResult Create()
         {
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId");
+            //Super breakdown of LINQ steps for review. 
+            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "Name");
+            ViewData["WaterTypeId"] = new SelectList(_context.WaterTypes, "WaterTypeId", "Name");
+            var stepOne = Enum.GetValues(typeof(SampleApplication.Enumerations.Aggression));
+            var stepTwo = stepOne.Cast<Enum>();
+            var stepThree = stepTwo.Select(e => new
+            {
+                WhatTheUserSees = e.ToString(),
+                InformationThatFills_WhatTheUserSees = Convert.ToInt32(e).ToString()
+            });
+            var stepFour = stepThree.ToList();
+            ViewData["AggressionLevel"] = new SelectList(stepFour, "InformationThatFills_WhatTheUserSees", "WhatTheUserSees");
             return View();
+
+            //  Concat version of the above
+
+            //  var AggressionLevels = Enum.GetValues(typeof(SampleApplication.Enumerations.Aggression))
+            //                           .Cast<Enum>()
+            //                           .Select(e => new
+            //                           {
+            //                           Text = e.ToString(),
+            //                           Value = Convert.ToInt32(e).ToString()
+            //                           })
+            //                           .ToList();
+            //  ViewData["AggressionLevel"] = new SelectList(AggressionLevels, "Value", "Text");
+            //  return View();
+
         }
 
         // POST: Fish/Create
@@ -93,7 +120,8 @@ namespace SampleApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fish.CountryId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "Name");
+            ViewData["WaterTypeId"] = new SelectList(_context.WaterTypes, "WaterTypeId", "Name");
             return View(fish);
         }
 
@@ -120,7 +148,7 @@ namespace SampleApplication.Controllers
                 WaterTypeId = fishEntity.WaterTypeId
             };
             
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fishEntity.CountryId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "Name", fishEntity.CountryId);
             return View(model);
         }
 
@@ -158,7 +186,7 @@ namespace SampleApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "CountyId", fish.CountryId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "CountyId", "Name", fish.CountryId);
             return View(fish);
         }
 

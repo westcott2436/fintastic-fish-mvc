@@ -22,44 +22,62 @@
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WaterTypeId)
+                Water Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AggressionLevel)
+                Aggression Level
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CountryId)
+                Native Country
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WaterTypeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AggressionLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountryId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FishId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FishId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FishId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @{
+                        var cost = String.Format("{0:C}", item.Cost);
+                    }
+                    @cost
+                    @* $@Html.DisplayFor(modelItem => item.Cost) *@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @{
+                        var waterType = (SampleApplication.Enumerations.WaterTypes)item.WaterTypeId;
+                    }
+                    @waterType
+                    @* @Html.DisplayFor(modelItem => item.WaterTypeId) *@
+                </td>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.AggressionLevel) *@
+                    @{
+                        var aggression = (SampleApplication.Enumerations.Aggression)item.AggressionLevel;
+                    }
+                    @* below is HTML to C# variable display from above *@
+                    @aggression
+                </td>
+                <td>
+                    @{
+                        var country = (SampleApplication.Enumerations.Countries)item.CountryId;
+                     }
+                    @* below is HTML to C# variable display from above *@
+                    @country
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.FishId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.FishId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.FishId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
