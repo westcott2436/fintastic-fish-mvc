@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 namespace FintasticFish.Data.Entities;
 
-public partial class WaterType
+public partial class Customer
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string FirstName { get; set; }
 
-    public virtual ICollection<Fish> Fish { get; set; } = new List<Fish>();
+    public string LastName { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

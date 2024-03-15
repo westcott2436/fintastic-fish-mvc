@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FintasticFish.Data.Entities;
 
-public partial class WaterType
+public partial class AggressionLevel
 {
     public int Id { get; set; }
 
