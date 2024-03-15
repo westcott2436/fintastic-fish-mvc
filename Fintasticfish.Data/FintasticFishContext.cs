@@ -3,8 +3,9 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using FintasticFish.Data.Entities;
 
-namespace FintasticFish.Data.Entities;
+namespace FintasticFish.Data;
 
 public partial class FintasticFishContext : DbContext
 {
