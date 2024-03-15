@@ -1,0 +1,118 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "FintasticFishContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entities",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "FintasticFish.Data",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Addresses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AddressTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AggressionLevels]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Countries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Customers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomersAddresses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Fishes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FishesFoods]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Foods]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FoodTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Measurements]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Order]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrdersFishes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrdersFoods]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderStatuses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[States]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Suppliers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SupplierTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WaterType]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "rainbow-puke\\sqlexpress.FintasticFish.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": true,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
