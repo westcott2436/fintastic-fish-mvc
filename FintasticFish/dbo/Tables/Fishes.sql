@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[Fishes] (
+    [Id]                INT             IDENTITY (1, 1) NOT NULL,
+    [Name]              NVARCHAR (100)  NOT NULL,
+    [Species]           NVARCHAR (100)  NOT NULL,
+    [Size]              NVARCHAR (100)  NOT NULL,
+    [MeasurementId]     INT             NOT NULL,
+    [Color]             NVARCHAR (100)  NOT NULL,
+    [Price]             SMALLMONEY      NOT NULL,
+    [Stock]             INT             NOT NULL,
+    [IsSpecialOrder]    BIT             NOT NULL,
+    [Description]       NVARCHAR (MAX)  NOT NULL,
+    [Image]             VARBINARY (MAX) NOT NULL,
+    [CountryId]         INT             NOT NULL,
+    [SupplierId]        INT             NOT NULL,
+    [WaterTypeId]       INT             NOT NULL,
+    [AggressionLevelId] INT             NOT NULL,
+    [AggressionTypeId] INT NOT NULL, 
+    CONSTRAINT [PK_Fishes] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Fishes_AggressionLevels] FOREIGN KEY ([AggressionLevelId]) REFERENCES [dbo].[AggressionLevels] ([Id]),
+    CONSTRAINT [FK_Fishes_Countries] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Countries] ([Id]),
+    CONSTRAINT [FK_Fishes_Measurements] FOREIGN KEY ([MeasurementId]) REFERENCES [dbo].[Measurements] ([Id]),
+    CONSTRAINT [FK_Fishes_Suppliers] FOREIGN KEY ([SupplierId]) REFERENCES [dbo].[Suppliers] ([Id]),
+    CONSTRAINT [FK_Fishes_WaterType] FOREIGN KEY ([WaterTypeId]) REFERENCES [dbo].[WaterType] ([Id]), 
+    CONSTRAINT [FK_Fishes_AggressionTypes] FOREIGN KEY ([AggressionTypeId]) REFERENCES [dbo].[AggressionTypes]([Id])
+);
+
