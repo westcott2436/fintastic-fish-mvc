@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Order] (
     [Id]            INT        IDENTITY (1, 1) NOT NULL,
     [OrderDate]     DATE       NOT NULL,
-    [Total]         FLOAT (53) NOT NULL,
+    [Total]         SMALLMONEY NOT NULL,
     [AddressId]     INT        NOT NULL,
     [CustomerId]    INT        NOT NULL,
     [OrderStatusId] INT        NOT NULL,

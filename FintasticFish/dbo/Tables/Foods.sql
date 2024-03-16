@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[Foods] (
     [Id]             INT            IDENTITY (1, 1) NOT NULL,
     [Name]           NVARCHAR (100) NOT NULL,
-    [Price]          FLOAT (53)     NOT NULL,
-    [SalePrice]      FLOAT (53)     NOT NULL,
+    [Price]          SMALLMONEY     NOT NULL,
+    [SalePrice]      SMALLMONEY     NOT NULL,
     [Size]           FLOAT (53)     NOT NULL,
-    [Taxable]        FLOAT (53)     NOT NULL,
+    [Taxable]        BIT     NOT NULL,
     [Stock]          INT            CONSTRAINT [DF_Foods_Stock] DEFAULT ((0)) NOT NULL,
     [SaleStartDate]  DATE           NOT NULL,
     [SaleEndDate]    DATE           NOT NULL,
