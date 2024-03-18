@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>FintasticFish</Name>
+    <Name>FintasticFish.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{ca065185-f80d-40da-b8a0-5740fb1472aa}</ProjectGuid>
@@ -96,5 +96,6 @@
     <None Include="SeedData\Measurements-Seed.sql" />
     <None Include="SeedData\States-Seed.sql" />
     <None Include="SeedData\WaterType-Seed.sql" />
+    <None Include="SeedData\SupplierTypes-Seed.sql" />
   </ItemGroup>
 </Project>

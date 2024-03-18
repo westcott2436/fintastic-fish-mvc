@@ -9,6 +9,11 @@ namespace FintasticFish.Data;
 
 public partial class FintasticFishContext : DbContext
 {
+    public FintasticFishContext()// Work around for creating controllers.
+    {
+            
+    }
+
     public FintasticFishContext(DbContextOptions<FintasticFishContext> options)
         : base(options)
     {
