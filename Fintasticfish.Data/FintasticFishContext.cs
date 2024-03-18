@@ -18,7 +18,10 @@ public partial class FintasticFishContext : DbContext
         : base(options)
     {
     }
-
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;");
+    }
     public virtual DbSet<Address> Addresses { get; set; }
 
     public virtual DbSet<AddressType> AddressTypes { get; set; }

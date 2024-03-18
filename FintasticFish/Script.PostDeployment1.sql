@@ -17,3 +17,4 @@ Post-Deployment Script Template
 :r .\SeedData\Measurements-Seed.sql
 :r .\SeedData\States-Seed.sql
 :r .\SeedData\WaterType-Seed.sql
+:r .\SeedData\SupplierTypes-Seed.sql
