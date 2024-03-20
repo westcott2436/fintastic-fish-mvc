@@ -28,6 +28,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AggressionTypes]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Countries]",
          "ObjectType": 0
       },
@@ -92,7 +96,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "rainbow-puke\\sqlexpress.FintasticFish.dbo",
+   "UiHint": "win-qjv9e95vd4r\\sqlexpress.FintasticFish.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,

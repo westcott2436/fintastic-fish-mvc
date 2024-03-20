@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using FintasticFish.Data;
+using System.Configuration;
+using FintasticFish.Data.Entities;
 
 namespace SampleApplication
 {
@@ -12,9 +14,10 @@ namespace SampleApplication
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             //var connectionString = builder.Configuration.GetConnectionString("LocalDB");   
-
+            var config = builder.Configuration;
             //TODO: Figure out why named configuration string are not working 2 locations.
-            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;"));
+            var connectionString = config.GetConnectionString("LocalDB");
+            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer(config.GetConnectionString("LocalDB")));
             
             var app = builder.Build();
 
