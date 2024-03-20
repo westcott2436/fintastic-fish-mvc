@@ -24,7 +24,7 @@ public partial class Fish
 
     public decimal Price { get; set; }
 
-    public int Stock { get; set; }
+    public bool Stock { get; set; }
 
     public bool IsSpecialOrder { get; set; }
 
