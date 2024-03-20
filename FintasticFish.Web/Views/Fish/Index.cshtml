@@ -85,10 +85,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                    <img src="@Url.Action("GetFishImage", new { id = item.Id })" alt="Fish Image" />
+                <img class="responsive"  src="@Url.Action("GetFishImage", new { id = item.Id })" alt="Fish Image" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AggressionLevel.Id)
+                @Html.DisplayFor(modelItem => item.AggressionLevel.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country.Name)
@@ -103,9 +103,11 @@
                 @Html.DisplayFor(modelItem => item.WaterType.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <div class="flex-column-container">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
             </td>
         </tr>
 }

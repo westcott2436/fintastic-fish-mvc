@@ -10,6 +10,7 @@ using FintasticFish.Data.Entities;
 using SixLabors.ImageSharp.Formats.Webp;
 using System.IO;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats;
 
 namespace FintasticFish.Web.Controllers
 {
@@ -59,7 +60,7 @@ namespace FintasticFish.Web.Controllers
             ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Name");
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
             ViewData["MeasurementId"] = new SelectList(_context.Measurements, "Id", "Name");
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "ContactName");
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name");
             ViewData["WaterTypeId"] = new SelectList(_context.WaterTypes, "Id", "Name");
             return View();
         }
@@ -82,17 +83,22 @@ namespace FintasticFish.Web.Controllers
                 }
                 catch(Exception ex)
                 {
-
+                    //todo: log this error
                 }
-               
             }
-            ViewData["AggressionTypeId"] = new SelectList(_context.AggressionTypes, "Id", "Name");
+
+            ViewData["AggressionTypeId"] = new SelectList(_context.AggressionTypes, "Id", "Name", fish.AggressionTypeId);
             ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Name", fish.AggressionLevelId);
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", fish.CountryId);
             ViewData["MeasurementId"] = new SelectList(_context.Measurements, "Id", "Name", fish.MeasurementId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "ContactName", fish.SupplierId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", fish.SupplierId);
             ViewData["WaterTypeId"] = new SelectList(_context.WaterTypes, "Id", "Name", fish.WaterTypeId);
             return View(fish);
+        }
+
+        private void PopulateViewData()
+        {
+
         }
         public async Task<FileResult> GetFishImage(int id)
         {
@@ -100,15 +106,19 @@ namespace FintasticFish.Web.Controllers
             
             return File(fish!.Image, "image/jpg");
         }
+
+        //https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html
         private async Task<byte[]> BuildWebpFromFormFile(IFormFile formFile)
         {
-            using var memoryStream = new MemoryStream();
+            var memoryStream = new MemoryStream();
             await formFile.CopyToAsync(memoryStream);
-            // need to figure out the webp converstion
-            //using var myImage = await Image.LoadAsync(memoryStream);
-            //using var outStream = new MemoryStream();
-            //await myImage.SaveAsync(outStream, new WebpEncoder());
-            return memoryStream.ToArray();
+            // When you are copying to a stream you are leaving the stream position at the end of the stream
+            // not at the beginning. You need to set the position to 0
+            memoryStream.Position = 0;
+            using var myImage = await Image.LoadAsync(memoryStream);
+            using var outStream = new MemoryStream();
+            await myImage.SaveAsync(outStream, new WebpEncoder());
+            return outStream.ToArray();
         }
 
         // GET: Fish/Edit/5
@@ -124,10 +134,10 @@ namespace FintasticFish.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Id", fish.AggressionLevelId);
+            ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Name", fish.AggressionLevelId);
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", fish.CountryId);
             ViewData["MeasurementId"] = new SelectList(_context.Measurements, "Id", "Name", fish.MeasurementId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "ContactName", fish.SupplierId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", fish.SupplierId);
             ViewData["WaterTypeId"] = new SelectList(_context.WaterTypes, "Id", "Name", fish.WaterTypeId);
             return View(fish);
         }
@@ -164,10 +174,10 @@ namespace FintasticFish.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Id", fish.AggressionLevelId);
+            ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Name", fish.AggressionLevelId);
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", fish.CountryId);
             ViewData["MeasurementId"] = new SelectList(_context.Measurements, "Id", "Name", fish.MeasurementId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "ContactName", fish.SupplierId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", fish.SupplierId);
             ViewData["WaterTypeId"] = new SelectList(_context.WaterTypes, "Id", "Name", fish.WaterTypeId);
             return View(fish);
         }
