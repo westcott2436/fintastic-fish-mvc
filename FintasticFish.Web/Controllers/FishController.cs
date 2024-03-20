@@ -106,7 +106,7 @@ namespace FintasticFish.Web.Controllers
         //https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html
         private async Task<byte[]> BuildWebpFromFormFile(IFormFile formFile)
         {
-            var memoryStream = new MemoryStream();
+            using var memoryStream = new MemoryStream();
             await formFile.CopyToAsync(memoryStream);
             // When you are copying to a stream you are leaving the stream position at the end of the stream
             // not at the beginning. You need to set the position to 0
