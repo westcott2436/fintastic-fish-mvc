@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using FintasticFish.Data;
+using System.Configuration;
+using FintasticFish.Data.Entities;
+using SixLabors.ImageSharp.Web.DependencyInjection;
 
 namespace SampleApplication
 {
@@ -8,13 +11,12 @@ namespace SampleApplication
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory());
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            //var connectionString = builder.Configuration.GetConnectionString("LocalDB");   
-
-            //TODO: Figure out why named configuration string are not working 2 locations.
-            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;"));
+            builder.Services.AddImageSharp();
+            var config = builder.Configuration;
+            var connectionString = config.GetConnectionString("LocalDB");
+            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer(connectionString));
             
             var app = builder.Build();
 
@@ -25,7 +27,7 @@ namespace SampleApplication
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseImageSharp();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

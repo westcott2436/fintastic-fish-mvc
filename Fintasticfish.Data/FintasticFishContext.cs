@@ -3,30 +3,23 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using FintasticFish.Data.Entities;
 
-namespace FintasticFish.Data;
+namespace FintasticFish.Data.Entities;
 
 public partial class FintasticFishContext : DbContext
 {
-    public FintasticFishContext()// Work around for creating controllers.
-    {
-            
-    }
-
     public FintasticFishContext(DbContextOptions<FintasticFishContext> options)
         : base(options)
     {
     }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;");
-    }
+
     public virtual DbSet<Address> Addresses { get; set; }
 
     public virtual DbSet<AddressType> AddressTypes { get; set; }
 
     public virtual DbSet<AggressionLevel> AggressionLevels { get; set; }
+
+    public virtual DbSet<AggressionType> AggressionTypes { get; set; }
 
     public virtual DbSet<Country> Countries { get; set; }
 
@@ -69,10 +62,10 @@ public partial class FintasticFishContext : DbContext
                 .HasMaxLength(100);
             entity.Property(e => e.Street1)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(250);
             entity.Property(e => e.Street2)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(250);
 
             entity.HasOne(d => d.AddressType).WithMany(p => p.Addresses)
                 .HasForeignKey(d => d.AddressTypeId)
@@ -100,6 +93,16 @@ public partial class FintasticFishContext : DbContext
         modelBuilder.Entity<AggressionLevel>(entity =>
         {
             entity.Property(e => e.Name).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<AggressionType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Aggressi__3214EC071D7479DF");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<Country>(entity =>
@@ -144,6 +147,7 @@ public partial class FintasticFishContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+            entity.Property(e => e.Price).HasColumnType("smallmoney");
             entity.Property(e => e.Size)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -155,6 +159,11 @@ public partial class FintasticFishContext : DbContext
                 .HasForeignKey(d => d.AggressionLevelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Fishes_AggressionLevels");
+
+            entity.HasOne(d => d.AggressionType).WithMany(p => p.Fish)
+                .HasForeignKey(d => d.AggressionTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Fishes_AggressionTypes");
 
             entity.HasOne(d => d.Country).WithMany(p => p.Fish)
                 .HasForeignKey(d => d.CountryId)
@@ -197,6 +206,8 @@ public partial class FintasticFishContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+            entity.Property(e => e.Price).HasColumnType("smallmoney");
+            entity.Property(e => e.SalePrice).HasColumnType("smallmoney");
 
             entity.HasOne(d => d.FoodType).WithMany(p => p.Foods)
                 .HasForeignKey(d => d.FoodTypeId)
@@ -226,6 +237,8 @@ public partial class FintasticFishContext : DbContext
         modelBuilder.Entity<Order>(entity =>
         {
             entity.ToTable("Order");
+
+            entity.Property(e => e.Total).HasColumnType("smallmoney");
 
             entity.HasOne(d => d.Address).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.AddressId)
@@ -294,19 +307,17 @@ public partial class FintasticFishContext : DbContext
                 .HasMaxLength(100);
             entity.Property(e => e.Email)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(255);
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
-            entity.Property(e => e.Notes)
-                .IsRequired()
-                .HasMaxLength(100);
+            entity.Property(e => e.Notes).IsRequired();
             entity.Property(e => e.Phone)
                 .IsRequired()
                 .HasMaxLength(20);
             entity.Property(e => e.Website)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(400);
 
             entity.HasOne(d => d.Country).WithMany(p => p.Suppliers)
                 .HasForeignKey(d => d.CountryId)

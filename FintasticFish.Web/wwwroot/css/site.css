@@ -37,3 +37,12 @@ body {
 .super-large-font {
     font-size:7em;
 }
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+.flex-column-container {
+    display: flex;
+    flex-direction: column;
+}

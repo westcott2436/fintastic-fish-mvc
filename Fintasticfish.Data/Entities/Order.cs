@@ -11,7 +11,7 @@ public partial class Order
 
     public DateOnly OrderDate { get; set; }
 
-    public double Total { get; set; }
+    public decimal Total { get; set; }
 
     public int AddressId { get; set; }
 

@@ -11,13 +11,13 @@ public partial class Food
 
     public string Name { get; set; }
 
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 
-    public double SalePrice { get; set; }
+    public decimal SalePrice { get; set; }
 
     public double Size { get; set; }
 
-    public double Taxable { get; set; }
+    public bool Taxable { get; set; }
 
     public int Stock { get; set; }
 
