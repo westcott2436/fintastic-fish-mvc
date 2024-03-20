@@ -11,15 +11,12 @@ namespace SampleApplication
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            //builder.Configuration.SetBasePath(Directory.GetCurrentDirectory());
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddImageSharp();
-            //var connectionString = builder.Configuration.GetConnectionString("LocalDB");   
             var config = builder.Configuration;
-            //TODO: Figure out why named configuration string are not working 2 locations.
             var connectionString = config.GetConnectionString("LocalDB");
-            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer(config.GetConnectionString("LocalDB")));
+            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer(connectionString));
             
             var app = builder.Build();
 
