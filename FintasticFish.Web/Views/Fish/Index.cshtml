@@ -31,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsSpecialOrder)
+                Is Special Order
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -40,7 +40,10 @@
                 Image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AggressionLevel)
+                Aggression Level
+            </th>
+            <th>
+                Aggression Type
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Country)
@@ -52,7 +55,7 @@
                 @Html.DisplayNameFor(model => model.Supplier)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WaterType)
+                Water Type
             </th>
             <th></th>
         </tr>
@@ -91,13 +94,16 @@
                 @Html.DisplayFor(modelItem => item.AggressionLevel.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.AggressionType.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Country.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Measurement.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier.ContactName)
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WaterType.Name)

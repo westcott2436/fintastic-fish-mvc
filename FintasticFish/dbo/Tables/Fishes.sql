@@ -6,7 +6,7 @@
     [MeasurementId]     INT             NOT NULL,
     [Color]             NVARCHAR (100)  NOT NULL,
     [Price]             SMALLMONEY      NOT NULL,
-    [Stock]             INT             NOT NULL,
+    [Stock]             BIT             NOT NULL,
     [IsSpecialOrder]    BIT             NOT NULL,
     [Description]       NVARCHAR (MAX)  NOT NULL,
     [Image]             VARBINARY (MAX) NOT NULL,

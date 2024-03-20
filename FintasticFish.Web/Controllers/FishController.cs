@@ -26,7 +26,13 @@ namespace FintasticFish.Web.Controllers
         // GET: Fish
         public async Task<IActionResult> Index()
         {
-            var fintasticFishContext = _context.Fishes.Include(f => f.AggressionLevel).Include(f => f.Country).Include(f => f.Measurement).Include(f => f.Supplier).Include(f => f.WaterType);
+            var fintasticFishContext = _context.Fishes
+                                      .Include(f => f.AggressionLevel)
+                                      .Include(f => f.AggressionType)
+                                      .Include(f => f.Country)
+                                      .Include(f => f.Measurement)
+                                      .Include(f => f.Supplier)
+                                      .Include(f => f.WaterType);
             return View(await fintasticFishContext.ToListAsync());
         }
 
@@ -40,6 +46,7 @@ namespace FintasticFish.Web.Controllers
 
             var fish = await _context.Fishes
                 .Include(f => f.AggressionLevel)
+                .Include(f => f.AggressionType)
                 .Include(f => f.Country)
                 .Include(f => f.Measurement)
                 .Include(f => f.Supplier)
@@ -70,7 +77,7 @@ namespace FintasticFish.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Species,Size,MeasurementId,Color,Price,Stock,IsSpecialOrder,Description,FormFile,CountryId,SupplierId,WaterTypeId,AggressionLevelId, AggressionTypeId")] Fish fish)
+        public async Task<IActionResult> Create([Bind("Id,Name,Species,Size,MeasurementId,Color,Price,Stock,IsSpecialOrder,Description,FormFile,CountryId,SupplierId,WaterTypeId,AggressionLevelId,AggressionTypeId")] Fish fish)
         {
             if (ModelState.IsValid)
             {
@@ -131,6 +138,7 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
             ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Name", fish.AggressionLevelId);
+            ViewData["AggressionTypeId"] = new SelectList(_context.AggressionTypes, "Id", "Name", fish.AggressionTypeId);
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", fish.CountryId);
             ViewData["MeasurementId"] = new SelectList(_context.Measurements, "Id", "Name", fish.MeasurementId);
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", fish.SupplierId);
@@ -143,7 +151,7 @@ namespace FintasticFish.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Species,Size,MeasurementId,Color,Price,Stock,IsSpecialOrder,Description,Image,CountryId,SupplierId,WaterTypeId,AggressionLevelId")] Fish fish)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Species,Size,MeasurementId,Color,Price,Stock,IsSpecialOrder,Description,FormFile,CountryId,SupplierId,WaterTypeId,AggressionLevelId,AggressionTypeId")] Fish fish)
         {
             if (id != fish.Id)
             {
@@ -154,6 +162,7 @@ namespace FintasticFish.Web.Controllers
             {
                 try
                 {
+                    fish.Image = await BuildWebpFromFormFile(fish.FormFile);
                     _context.Update(fish);
                     await _context.SaveChangesAsync();
                 }
@@ -171,6 +180,7 @@ namespace FintasticFish.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AggressionLevelId"] = new SelectList(_context.AggressionLevels, "Id", "Name", fish.AggressionLevelId);
+            ViewData["AggressionTypeId"] = new SelectList(_context.AggressionTypes, "Id", "Name", fish.AggressionTypeId);
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", fish.CountryId);
             ViewData["MeasurementId"] = new SelectList(_context.Measurements, "Id", "Name", fish.MeasurementId);
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", fish.SupplierId);
@@ -188,6 +198,7 @@ namespace FintasticFish.Web.Controllers
 
             var fish = await _context.Fishes
                 .Include(f => f.AggressionLevel)
+                .Include(f => f.AggressionType)
                 .Include(f => f.Country)
                 .Include(f => f.Measurement)
                 .Include(f => f.Supplier)
