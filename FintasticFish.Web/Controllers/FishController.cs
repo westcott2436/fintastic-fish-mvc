@@ -96,10 +96,6 @@ namespace FintasticFish.Web.Controllers
             return View(fish);
         }
 
-        private void PopulateViewData()
-        {
-
-        }
         public async Task<FileResult> GetFishImage(int id)
         {
             Fish? fish = await _context.Fishes.FindAsync(id);
