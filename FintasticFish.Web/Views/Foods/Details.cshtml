@@ -1,0 +1,78 @@
+﻿@model FintasticFish.Data.Entities.Food
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Food</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            $@Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            Sale Price
+        </dt>
+        <dd class = "col-sm-10">
+            $@Html.DisplayFor(model => model.SalePrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Taxable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Taxable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+        <dt class = "col-sm-2">
+            Sale Start Date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SaleStartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            Sale End Date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SaleEndDate)
+        </dd>
+        <dt class = "col-sm-2">
+            Food Type
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FoodType.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mearsurement)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mearsurement.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
