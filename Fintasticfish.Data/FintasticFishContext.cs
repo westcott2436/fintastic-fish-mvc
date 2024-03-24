@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 
 namespace FintasticFish.Data.Entities;
@@ -74,7 +75,6 @@ public partial class FintasticFishContext : DbContext
                 .IsRequired()
                 .HasMaxLength(250);
             entity.Property(e => e.Street2)
-                .IsRequired()
                 .HasMaxLength(250);
 
             entity.HasOne(d => d.AddressType).WithMany(p => p.Addresses)
@@ -99,21 +99,32 @@ public partial class FintasticFishContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100);
         });
+        modelBuilder.Entity<AddressType>().HasData(new AddressType { Id = 1, Name = "Home" },
+                                                   new AddressType { Id = 2, Name = "Mailing" },
+                                                   new AddressType { Id = 3, Name = "Business" });
 
         modelBuilder.Entity<AggressionLevel>(entity =>
         {
-            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
         });
+
+        modelBuilder.Entity<AggressionLevel>().HasData(new AggressionLevel { Id = 1, Name = "Docile" },
+                                                       new AggressionLevel { Id = 2, Name = "Aggressive" },
+                                                       new AggressionLevel { Id = 3, Name = "Moderate" });
 
         modelBuilder.Entity<AggressionType>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Aggressi__3214EC071D7479DF");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+                 .IsRequired()
+                 .HasMaxLength(50);
         });
+
+        modelBuilder.Entity<AggressionType>().HasData(new AggressionType { Id = 1, Name = "Territorial" },
+                                                      new AggressionType { Id = 2, Name = "Social" },
+                                                      new AggressionType { Id = 3, Name = "Time" },
+                                                      new AggressionType { Id = 4, Name = "Temperature" });
 
         modelBuilder.Entity<Country>(entity =>
         {
@@ -121,6 +132,11 @@ public partial class FintasticFishContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100);
         });
+
+        modelBuilder.Entity<Country>().HasData(new Country { Id = 1, Name = "North America" },
+                                               new Country { Id = 2, Name = "South America" },
+                                               new Country { Id = 3, Name = "Africa" },
+                                               new Country { Id = 4, Name = "Asia" });
 
         modelBuilder.Entity<Customer>(entity =>
         {
@@ -237,12 +253,25 @@ public partial class FintasticFishContext : DbContext
                 .HasMaxLength(100);
         });
 
+        modelBuilder.Entity<FoodType>().HasData(new FoodType { Id = 1, Name = "Flake" },
+                                                new FoodType { Id = 2, Name = "Pellet" },
+                                                new FoodType { Id = 3, Name = "Live" },
+                                                new FoodType { Id = 4, Name = "Frozen" },
+                                                new FoodType { Id = 5, Name = "Waffer" },
+                                                new FoodType { Id = 6, Name = "Organic" });
+
         modelBuilder.Entity<Measurement>(entity =>
         {
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
         });
+
+        modelBuilder.Entity<Measurement>().HasData(new Measurement { Id = 1, Name = "Inches, in" },
+                                                   new Measurement { Id = 2, Name = "Centimeters, cm" },
+                                                   new Measurement { Id = 3, Name = "Millimeters, mm" },
+                                                   new Measurement { Id = 4, Name = "Pounds, lbs" },
+                                                   new Measurement { Id = 5, Name = "Ounces, oz" });
 
         modelBuilder.Entity<Order>(entity =>
         {
@@ -310,6 +339,57 @@ public partial class FintasticFishContext : DbContext
                 .HasMaxLength(100);
         });
 
+        modelBuilder.Entity<State>().HasData(new State { Id = 1, Name = "Alabama" },
+                                             new State { Id = 2, Name = "Alaska" },
+                                             new State { Id = 3, Name = "Arizona" },
+                                             new State { Id = 4, Name = "Arkansas" },
+                                             new State { Id = 5, Name = "California" },
+                                             new State { Id = 6, Name = "Colorado" },
+                                             new State { Id = 7, Name = "Connecticut" },
+                                             new State { Id = 8, Name = "Delaware" },
+                                             new State { Id = 9, Name = "Florida" },
+                                             new State { Id = 10, Name = "Georgia" },
+                                             new State { Id = 11, Name = "Hawaii" },
+                                             new State { Id = 12, Name = "Idaho" },
+                                             new State { Id = 13, Name = "Illinois" },
+                                             new State { Id = 14, Name = "Indiana" },
+                                             new State { Id = 15, Name = "Iowa" },
+                                             new State { Id = 16, Name = "Kansas" },
+                                             new State { Id = 17, Name = "Kentucky" },
+                                             new State { Id = 18, Name = "Louisiana" },
+                                             new State { Id = 19, Name = "Maine" },
+                                             new State { Id = 20, Name = "Maryland" },
+                                             new State { Id = 21, Name = "Massachusetts" },
+                                             new State { Id = 22, Name = "Michigan" },
+                                             new State { Id = 23, Name = "Minnesota" },
+                                             new State { Id = 24, Name = "Mississippi" },
+                                             new State { Id = 25, Name = "Missouri" },
+                                             new State { Id = 26, Name = "Montana" },
+                                             new State { Id = 27, Name = "Nebraska" },
+                                             new State { Id = 28, Name = "Nevada" },
+                                             new State { Id = 29, Name = "New Hampshire" },
+                                             new State { Id = 30, Name = "New Jersey" },
+                                             new State { Id = 31, Name = "New Mexico" },
+                                             new State { Id = 32, Name = "New York" },
+                                             new State { Id = 33, Name = "North Carolina" },
+                                             new State { Id = 34, Name = "North Dakota" },
+                                             new State { Id = 35, Name = "Ohio" },
+                                             new State { Id = 36, Name = "Oklahoma" },
+                                             new State { Id = 37, Name = "Oregon" },
+                                             new State { Id = 38, Name = "Pennsylvania" },
+                                             new State { Id = 39, Name = "Rhode Island" },
+                                             new State { Id = 40, Name = "South Carolina" },
+                                             new State { Id = 41, Name = "South Dakota" },
+                                             new State { Id = 42, Name = "Tennessee" },
+                                             new State { Id = 43, Name = "Texas" },
+                                             new State { Id = 44, Name = "Utah" },
+                                             new State { Id = 45, Name = "Vermont" },
+                                             new State { Id = 46, Name = "Virginia" },
+                                             new State { Id = 47, Name = "Washington" },
+                                             new State { Id = 48, Name = "West Virginia" },
+                                             new State { Id = 49, Name = "Wisconsin" },
+                                             new State { Id = 50, Name = "Wyoming" });
+
         modelBuilder.Entity<Supplier>(entity =>
         {
             entity.Property(e => e.ContactName)
@@ -347,6 +427,11 @@ public partial class FintasticFishContext : DbContext
                 .HasMaxLength(100);
         });
 
+        modelBuilder.Entity<SupplierType>().HasData(new SupplierType { Id = 1, Name = "Fish" },
+                                                    new SupplierType { Id = 2, Name = "Food" },
+                                                    new SupplierType { Id = 3, Name = "Consumables" },
+                                                    new SupplierType { Id = 4, Name = "Plants" });
+
         modelBuilder.Entity<WaterType>(entity =>
         {
             entity.ToTable("WaterType");
@@ -356,7 +441,11 @@ public partial class FintasticFishContext : DbContext
                 .HasMaxLength(100);
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        modelBuilder.Entity<WaterType>().HasData(new WaterType { Id = 1, Name = "Fresh" },
+                                                 new WaterType { Id = 2, Name = "Salt" },
+                                                 new WaterType { Id = 3, Name = "Brackish" });
+
+       OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

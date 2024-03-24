@@ -119,6 +119,15 @@ namespace FintasticFish.Web.Controllers
             // not at the beginning. You need to set the position to 0
             memoryStream.Position = 0;
             using var myImage = await Image.LoadAsync(memoryStream);
+            var newSize = new Size(275, 183); // Example size, adjust as needed
+            var paddingColor = Color.Black; // Example padding color, adjust as needed
+            myImage.Mutate(x => x.Resize(new ResizeOptions
+            {
+                Mode = ResizeMode.BoxPad,
+                Size = newSize,
+                Position = AnchorPositionMode.Center, // Position of the image within the padding
+                PadColor = paddingColor
+            }));
             using var outStream = new MemoryStream();
             await myImage.SaveAsync(outStream, new WebpEncoder());
             return outStream.ToArray();

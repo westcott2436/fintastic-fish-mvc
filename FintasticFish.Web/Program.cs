@@ -16,7 +16,7 @@ namespace SampleApplication
             builder.Services.AddImageSharp();
             var config = builder.Configuration;
             var connectionString = config.GetConnectionString("LocalDB");
-            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<FintasticFishContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("FintasticFish.Web")));
             
             var app = builder.Build();
 
