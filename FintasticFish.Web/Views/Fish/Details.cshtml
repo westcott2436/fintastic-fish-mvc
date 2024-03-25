@@ -23,12 +23,6 @@
             @Html.DisplayFor(model => model.Species)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Color)
         </dt>
         <dd class = "col-sm-10">
@@ -47,7 +41,7 @@
             @Html.DisplayFor(model => model.Stock)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsSpecialOrder)
+            Is Special Order
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IsSpecialOrder)
@@ -65,16 +59,28 @@
             @Html.DisplayFor(model => model.Image)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AggressionLevel)
+            Aggression Level
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AggressionLevel.Id)
+            @Html.DisplayFor(model => model.AggressionLevel.Name)
         </dd>
+        <dt class="col-sm-2"> 
+            Aggression Type
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AggressionType.Name)
+        </dd>                    
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Country)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Size)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Measurement)
@@ -89,7 +95,7 @@
             @Html.DisplayFor(model => model.Supplier.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WaterType)
+            Water Type
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.WaterType.Name)

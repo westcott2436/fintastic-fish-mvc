@@ -4,12 +4,45 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<div class="gradient-header">
+    <h1 class="gradient-text">Fin-Tastic's Stock</h1>
+</div>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+
+<div class="album py-5 bg-dark">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var fish in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <h3 class="margin-left">@Html.DisplayFor(modelItem => fish.Name)</h3>
+                        <img class="responsive" src="@Url.Action("GetFishImage", new { id = fish.Id })" alt="Fish Image" />
+
+                    <div class="card-body">
+                            <p class="card-text">@Html.DisplayFor(modelItem => fish.Description)</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a asp-action="Details" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                                <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                            </div>
+                                <small class="text-muted">$@Html.DisplayFor(modelItem => fish.Price)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -118,4 +151,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@

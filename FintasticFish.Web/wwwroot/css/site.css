@@ -46,3 +46,32 @@ body {
     display: flex;
     flex-direction: column;
 }
+.margin-left{
+    margin-left: .5em;
+}
+.page-title {
+    text-align: center;
+    font-size: 6em;
+}
+.page-top-banner {
+    font-size: 6em;
+    text-align: center;
+    background-image: linear-gradient(to right, blue,black,blue);
+    border-radius: .1em;
+    }
+
+
+.gradient-header {
+    background-image: linear-gradient(to right, blue, black, blue);
+    padding: 20px;
+    text-align: center;
+    border-radius: .5em;
+}
+
+.gradient-text {
+    font-size: 6em;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(to right, yellow, yellow, red, yellow, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
