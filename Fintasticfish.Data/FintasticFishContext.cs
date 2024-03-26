@@ -38,6 +38,8 @@ public partial class FintasticFishContext : DbContext
 
     public virtual DbSet<CustomersAddress> CustomersAddresses { get; set; }
 
+    public virtual DbSet<CustomerPhoneNumber> CustomerPhoneNumbers { get; set; }
+
     public virtual DbSet<Fish> Fishes { get; set; }
 
     public virtual DbSet<FishesFood> FishesFoods { get; set; }
@@ -63,6 +65,8 @@ public partial class FintasticFishContext : DbContext
     public virtual DbSet<State> States { get; set; }
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
+
+    public virtual DbSet<SupplierPhoneNumber> SupplierPhoneNumbers { get; set; }
 
     public virtual DbSet<SupplierType> SupplierTypes { get; set; }
 
