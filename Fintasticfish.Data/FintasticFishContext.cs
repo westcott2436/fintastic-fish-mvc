@@ -38,6 +38,8 @@ public partial class FintasticFishContext : DbContext
 
     public virtual DbSet<CustomersAddress> CustomersAddresses { get; set; }
 
+    public virtual DbSet<CustomerPhoneNumber> CustomerPhoneNumbers { get; set; }
+
     public virtual DbSet<Fish> Fishes { get; set; }
 
     public virtual DbSet<FishesFood> FishesFoods { get; set; }
@@ -56,9 +58,15 @@ public partial class FintasticFishContext : DbContext
 
     public virtual DbSet<OrdersFood> OrdersFoods { get; set; }
 
+    public virtual DbSet<PhoneNumber> PhoneNumbers { get; set; }
+
+    public virtual DbSet<PhoneNumberType> PhoneNumbersTypes { get; set; }
+
     public virtual DbSet<State> States { get; set; }
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
+
+    public virtual DbSet<SupplierPhoneNumber> SupplierPhoneNumbers { get; set; }
 
     public virtual DbSet<SupplierType> SupplierTypes { get; set; }
 
@@ -161,6 +169,21 @@ public partial class FintasticFishContext : DbContext
                 .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CustomersAddresses_Customers");
+        });
+
+        modelBuilder.Entity<CustomerPhoneNumber>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.HasOne(d => d.Customer).WithMany()
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CustomerPhoneNumber_Customer");
+
+            entity.HasOne(d => d.PhoneNumber).WithMany()
+                .HasForeignKey(d => d.PhoneNumberId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CustomerPhoneNumber_PhoneNumber");
         });
 
         modelBuilder.Entity<Fish>(entity =>
@@ -332,6 +355,29 @@ public partial class FintasticFishContext : DbContext
                 .HasConstraintName("FK_OrdersFoods_Order");
         });
 
+        modelBuilder.Entity<PhoneNumber>(entity =>
+        {
+            entity.Property(e => e.Number)
+                 .IsRequired()
+                 .HasMaxLength(50);
+
+            entity.HasOne(d => d.PhoneNumberType).WithMany(p => p.PhoneNumber)
+                 .HasForeignKey(d => d.PhoneNumberTypeId)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_PhoneNumber_PhoneNumberTypes");
+        });
+
+        modelBuilder.Entity<PhoneNumberType>(entity =>
+        {
+            entity.Property(e => e.Name)
+                  .IsRequired()
+                  .HasMaxLength(10);
+        });
+
+        modelBuilder.Entity<PhoneNumberType>().HasData(new PhoneNumberType { Id = 1, Name = "Cell"},
+                                                       new PhoneNumberType { Id = 2, Name = "Home"},
+                                                       new PhoneNumberType { Id = 3, Name = "Business" });
+        
         modelBuilder.Entity<State>(entity =>
         {
             entity.Property(e => e.Name)
@@ -402,9 +448,7 @@ public partial class FintasticFishContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100);
             entity.Property(e => e.Notes).IsRequired();
-            entity.Property(e => e.Phone)
-                .IsRequired()
-                .HasMaxLength(20);
+            
             entity.Property(e => e.Website)
                 .IsRequired()
                 .HasMaxLength(400);
@@ -418,6 +462,21 @@ public partial class FintasticFishContext : DbContext
                 .HasForeignKey(d => d.SupplierTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Suppliers_Suppliers");
+        });
+
+        modelBuilder.Entity<SupplierPhoneNumber>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.HasOne(d => d.Supplier).WithMany()
+                .HasForeignKey(d => d.SupplierId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SupplierPhoneNumber_Supplier");
+
+            entity.HasOne(d => d.PhoneNumber).WithMany()
+                .HasForeignKey(d => d.PhoneNumberId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SupplierPhoneNumber_PhoneNumber");
         });
 
         modelBuilder.Entity<SupplierType>(entity =>
