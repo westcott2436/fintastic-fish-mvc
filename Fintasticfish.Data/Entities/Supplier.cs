@@ -13,8 +13,6 @@ public partial class Supplier
 
     public string ContactName { get; set; }
 
-    public string Phone { get; set; }
-
     public string Email { get; set; }
 
     public string Website { get; set; }

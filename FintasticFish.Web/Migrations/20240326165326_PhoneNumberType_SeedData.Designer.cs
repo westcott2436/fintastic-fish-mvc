@@ -4,6 +4,7 @@ using FintasticFish.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FintasticFish.Web.Migrations
 {
     [DbContext(typeof(FintasticFishContext))]
-    partial class FintasticFishContextModelSnapshot : ModelSnapshot
+    [Migration("20240326165326_PhoneNumberType_SeedData")]
+    partial class PhoneNumberType_SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,21 +241,6 @@ namespace FintasticFish.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("FintasticFish.Data.Entities.CustomerPhoneNumber", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhoneNumberId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("PhoneNumberId");
-
-                    b.ToTable("CustomerPhoneNumber");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.CustomersAddress", b =>
@@ -949,6 +937,11 @@ namespace FintasticFish.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<int>("SupplierTypeId")
                         .HasColumnType("int");
 
@@ -964,21 +957,6 @@ namespace FintasticFish.Web.Migrations
                     b.HasIndex("SupplierTypeId");
 
                     b.ToTable("Suppliers");
-                });
-
-            modelBuilder.Entity("FintasticFish.Data.Entities.SupplierPhoneNumber", b =>
-                {
-                    b.Property<int>("PhoneNumberId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PhoneNumberId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("SupplierPhoneNumber");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.SupplierType", b =>
@@ -1081,25 +1059,6 @@ namespace FintasticFish.Web.Migrations
                     b.Navigation("Country");
 
                     b.Navigation("State");
-                });
-
-            modelBuilder.Entity("FintasticFish.Data.Entities.CustomerPhoneNumber", b =>
-                {
-                    b.HasOne("FintasticFish.Data.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .IsRequired()
-                        .HasConstraintName("FK_CustomerPhoneNumber_Customer");
-
-                    b.HasOne("FintasticFish.Data.Entities.PhoneNumber", "PhoneNumber")
-                        .WithMany()
-                        .HasForeignKey("PhoneNumberId")
-                        .IsRequired()
-                        .HasConstraintName("FK_CustomerPhoneNumber_PhoneNumber");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("PhoneNumber");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.CustomersAddress", b =>
@@ -1303,25 +1262,6 @@ namespace FintasticFish.Web.Migrations
                     b.Navigation("Country");
 
                     b.Navigation("SupplierType");
-                });
-
-            modelBuilder.Entity("FintasticFish.Data.Entities.SupplierPhoneNumber", b =>
-                {
-                    b.HasOne("FintasticFish.Data.Entities.PhoneNumber", "PhoneNumber")
-                        .WithMany()
-                        .HasForeignKey("PhoneNumberId")
-                        .IsRequired()
-                        .HasConstraintName("FK_SupplierPhoneNumber_PhoneNumber");
-
-                    b.HasOne("FintasticFish.Data.Entities.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .IsRequired()
-                        .HasConstraintName("FK_SupplierPhoneNumber_Supplier");
-
-                    b.Navigation("PhoneNumber");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.Address", b =>
