@@ -11,14 +11,14 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<div class="album py-5 bg-dark">
-    <div class="container">
+<div class="album fish-card-album-background">
+    <div class="containers">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 row-cols-md-5 g-1">
             @foreach (var fish in Model)
             {
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card fish-card-background">
                         <h3 class="margin-left">@Html.DisplayFor(modelItem => fish.Name)</h3>
                         <img class="responsive" src="@Url.Action("GetFishImage", new { id = fish.Id })" alt="Fish Image" />
 
