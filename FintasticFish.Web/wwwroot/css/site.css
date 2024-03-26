@@ -18,7 +18,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack flex items vertically */
+    margin-bottom: 60px;
 }
 
 .Contact {
@@ -62,8 +65,8 @@ body {
 
 
 .gradient-header {
-    background-image: linear-gradient(to right, blue, black, blue);
-    padding: 20px;
+    background: darkblue;
+    padding: 10px;
     text-align: center;
     border-radius: .5em;
 }
@@ -74,4 +77,19 @@ body {
     background-image: linear-gradient(to right, yellow, yellow, red, yellow, yellow);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.footer-text {
+    color: black; /* Set text color to black */
+    text-shadow: -1px -1px 0 grey, 1px -1px 0 grey, -1px 1px 0 grey, 1px 1px 0 grey; /* Apply white shadows to create the outline effect */
+}
+.fish-card-album-background {
+    background-color: rgba(0, 0, 0, 0.0); /* transparent background */
+}
+.fish-card-background {
+    background: black;
+}
+.logo-temp {
+    float: right;
+    width: 300px;
+    height: 180px;
 }

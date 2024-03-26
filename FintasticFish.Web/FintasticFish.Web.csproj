@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Fintasticfish.Data\FintasticFish.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>
