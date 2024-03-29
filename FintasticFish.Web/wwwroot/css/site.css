@@ -49,38 +49,39 @@ body {
     display: flex;
     flex-direction: column;
 }
-.margin-left{
-    margin-left: .5em;
+.home-page-text-layout {
+    margin-left: 1em;
+    text-align: left;
+    font-family: Georgia, serif;
+    font-size: 1.25em;
 }
 .page-title {
     text-align: center;
     font-size: 6em;
 }
 .page-top-banner {
-    font-size: 6em;
+    font-family: Georgia, serif;
+    font-size: 12em;
     text-align: center;
-    background-image: linear-gradient(to right, blue,black,blue);
     border-radius: .1em;
-    }
-
-
+    background-image: linear-gradient(to right, yellow, yellow, red, yellow, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-top: 56px;
+}
 .gradient-header {
     background: darkblue;
     padding: 10px;
     text-align: center;
-    border-radius: .5em;
+    border-radius: 0.5em;
+    padding-top: 50px;
 }
-
 .gradient-text {
     font-size: 6em;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Georgia, serif;
     background-image: linear-gradient(to right, yellow, yellow, red, yellow, yellow);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-.footer-text {
-    color: black; /* Set text color to black */
-    text-shadow: -1px -1px 0 grey, 1px -1px 0 grey, -1px 1px 0 grey, 1px 1px 0 grey; /* Apply white shadows to create the outline effect */
 }
 .fish-card-album-background {
     background-color: rgba(0, 0, 0, 0.0); /* transparent background */
@@ -92,4 +93,33 @@ body {
     float: right;
     width: 300px;
     height: 180px;
+}
+.home-background {
+    background-image: url('/Images/Jack-Dempsey-Fish-1024x683.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+.social-link {
+    display: inline-block;
+    width: 50px; 
+    height: 50px;
+    background-image: url(/Images/Facebook.svg.png); 
+    background-size: cover; 
+}
+.social-link:hover {
+    opacity: .5; 
+    cursor: pointer; 
+}
+.flex-container-footer {
+    display: flex;
+    margin-top: 20em;
+    flex-direction: row;
+    font-size: .75em;
+    color: white;
+    text-align: center;
+}
+
+.flex-item {
+    flex: 1;
+    margin: 0 10px;
 }
