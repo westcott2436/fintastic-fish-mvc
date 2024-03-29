@@ -5,15 +5,11 @@ using System.Collections.Generic;
 
 namespace FintasticFish.Data.Entities;
 
-public partial class Measurement
+public partial class PlantType
 {
     public int Id { get; set; }
 
     public string Name { get; set; }
 
-    public virtual ICollection<Fish> Fish { get; set; } = new List<Fish>();
-
-    public virtual ICollection<Food> Foods { get; set; } = new List<Food>();
-
-    public virtual ICollection<Plant> Plants { get; set; } = new List<Plant>();
+    public virtual ICollection<Plant> Plant { get; set; } = new List<Plant>();
 }

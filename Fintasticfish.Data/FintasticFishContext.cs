@@ -62,6 +62,10 @@ public partial class FintasticFishContext : DbContext
 
     public virtual DbSet<PhoneNumberType> PhoneNumbersTypes { get; set; }
 
+    public virtual DbSet<PhoneNumber> Plants { get; set; }
+
+    public virtual DbSet<PhoneNumberType> PlantTypes { get; set; }
+
     public virtual DbSet<State> States { get; set; }
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
@@ -377,7 +381,36 @@ public partial class FintasticFishContext : DbContext
         modelBuilder.Entity<PhoneNumberType>().HasData(new PhoneNumberType { Id = 1, Name = "Cell"},
                                                        new PhoneNumberType { Id = 2, Name = "Home"},
                                                        new PhoneNumberType { Id = 3, Name = "Business" });
-        
+        modelBuilder.Entity<Plant>(entity =>
+        {
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+            entity.Property(e => e.Price).HasColumnType("smallmoney");
+            entity.Property(e => e.SalePrice).HasColumnType("smallmoney");
+
+            entity.HasOne(d => d.PlantType).WithMany(p => p.Plant)
+                .HasForeignKey(d => d.PlantTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Plant_PlantTypes");
+
+            entity.HasOne(d => d.Mearsurement).WithMany(p => p.Plants)
+                .HasForeignKey(d => d.MearsurementId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Plant_Measurements");
+        });
+
+        modelBuilder.Entity<PlantType>(entity =>
+        {
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<PlantType>().HasData(new PlantType { Id = 1, Name = "Submerged" },
+                                                new PlantType { Id = 2, Name = "Emergent" },
+                                                new PlantType { Id = 3, Name = "Free Floating" });
+
         modelBuilder.Entity<State>(entity =>
         {
             entity.Property(e => e.Name)
