@@ -290,7 +290,7 @@ public partial class FintasticFishContext : DbContext
 
             entity.HasOne(d => d.Supplier).WithMany(p => p.Foods)
                .HasForeignKey(d => d.SupplierId)
-               .OnDelete(DeleteBehavior.ClientSetNull)
+               .OnDelete(DeleteBehavior.ClientSetNull) 
                .HasConstraintName("FK_Food_Suppliers");
         });
 
@@ -419,6 +419,11 @@ public partial class FintasticFishContext : DbContext
                 .HasForeignKey(d => d.MearsurementId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Plant_Measurements");
+
+            entity.HasOne(d => d.Supplier).WithMany(p => p.Plants)
+               .HasForeignKey(d => d.SupplierId)
+               .OnDelete(DeleteBehavior.ClientSetNull)
+               .HasConstraintName("FK_Plant_Suppliers");
         });
 
         modelBuilder.Entity<PlantType>(entity =>
