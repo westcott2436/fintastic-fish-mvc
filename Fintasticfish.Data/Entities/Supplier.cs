@@ -27,5 +27,9 @@ public partial class Supplier
 
     public virtual ICollection<Fish> Fish { get; set; } = new List<Fish>();
 
+    public virtual ICollection<Food> Foods { get; set; } = new List<Food>();
+
+    public virtual ICollection<Plant> Plants { get; set; } = new List<Plant>();
+
     public virtual SupplierType SupplierType { get; set; }
 }

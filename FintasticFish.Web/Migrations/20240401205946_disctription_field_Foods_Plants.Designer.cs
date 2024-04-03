@@ -4,6 +4,7 @@ using FintasticFish.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FintasticFish.Web.Migrations
 {
     [DbContext(typeof(FintasticFishContext))]
-    partial class FintasticFishContextModelSnapshot : ModelSnapshot
+    [Migration("20240401205946_disctription_field_Foods_Plants")]
+    partial class disctription_field_Foods_Plants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +67,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.AddressType", b =>
@@ -82,7 +85,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AddressTypes", (string)null);
+                    b.ToTable("AddressTypes");
 
                     b.HasData(
                         new
@@ -117,7 +120,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AggressionLevels", (string)null);
+                    b.ToTable("AggressionLevels");
 
                     b.HasData(
                         new
@@ -152,7 +155,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AggressionTypes", (string)null);
+                    b.ToTable("AggressionTypes");
 
                     b.HasData(
                         new
@@ -177,58 +180,6 @@ namespace FintasticFish.Web.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FintasticFish.Data.Entities.AquaSupplies", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MearsurementId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("smallmoney");
-
-                    b.Property<DateOnly>("SaleEndDate")
-                        .HasColumnType("date");
-
-                    b.Property<decimal>("SalePrice")
-                        .HasColumnType("smallmoney");
-
-                    b.Property<DateOnly>("SaleStartDate")
-                        .HasColumnType("date");
-
-                    b.Property<double>("Size")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Taxable")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MearsurementId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("AquaSupplies", (string)null);
-                });
-
             modelBuilder.Entity("FintasticFish.Data.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -244,7 +195,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
 
                     b.HasData(
                         new
@@ -289,7 +240,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.CustomerPhoneNumber", b =>
@@ -304,7 +255,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("PhoneNumberId");
 
-                    b.ToTable("CustomerPhoneNumbers", (string)null);
+                    b.ToTable("CustomerPhoneNumbers");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.CustomersAddress", b =>
@@ -319,7 +270,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("CustomersAddresses", (string)null);
+                    b.ToTable("CustomersAddresses");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.Fish", b =>
@@ -399,7 +350,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("WaterTypeId");
 
-                    b.ToTable("Fishes", (string)null);
+                    b.ToTable("Fishes");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.FishesFood", b =>
@@ -414,7 +365,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("FishesFoods", (string)null);
+                    b.ToTable("FishesFoods");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.Food", b =>
@@ -457,9 +408,6 @@ namespace FintasticFish.Web.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Taxable")
                         .HasColumnType("bit");
 
@@ -469,9 +417,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("MearsurementId");
 
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Foods", (string)null);
+                    b.ToTable("Foods");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.FoodType", b =>
@@ -489,7 +435,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FoodTypes", (string)null);
+                    b.ToTable("FoodTypes");
 
                     b.HasData(
                         new
@@ -539,7 +485,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Measurements", (string)null);
+                    b.ToTable("Measurements");
 
                     b.HasData(
                         new
@@ -618,7 +564,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatuses", (string)null);
+                    b.ToTable("OrderStatuses");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.OrdersFish", b =>
@@ -633,7 +579,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrdersFishes", (string)null);
+                    b.ToTable("OrdersFishes");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.OrdersFood", b =>
@@ -648,7 +594,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrdersFoods", (string)null);
+                    b.ToTable("OrdersFoods");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.PhoneNumber", b =>
@@ -671,7 +617,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("PhoneNumberTypeId");
 
-                    b.ToTable("PhoneNumbers", (string)null);
+                    b.ToTable("PhoneNumbers");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.PhoneNumberType", b =>
@@ -689,7 +635,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PhoneNumbersTypes", (string)null);
+                    b.ToTable("PhoneNumbersTypes");
 
                     b.HasData(
                         new
@@ -749,9 +695,6 @@ namespace FintasticFish.Web.Migrations
                     b.Property<bool>("Stock")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Taxable")
                         .HasColumnType("bit");
 
@@ -761,9 +704,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("PlantTypeId");
 
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Plants", (string)null);
+                    b.ToTable("Plants");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.PlantType", b =>
@@ -781,7 +722,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlantTypes", (string)null);
+                    b.ToTable("PlantTypes");
 
                     b.HasData(
                         new
@@ -816,7 +757,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("States", (string)null);
+                    b.ToTable("States");
 
                     b.HasData(
                         new
@@ -1115,7 +1056,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("SupplierTypeId");
 
-                    b.ToTable("Suppliers", (string)null);
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.SupplierPhoneNumber", b =>
@@ -1130,7 +1071,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("SupplierPhoneNumbers", (string)null);
+                    b.ToTable("SupplierPhoneNumbers");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.SupplierType", b =>
@@ -1148,7 +1089,7 @@ namespace FintasticFish.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SupplierTypes", (string)null);
+                    b.ToTable("SupplierTypes");
 
                     b.HasData(
                         new
@@ -1233,25 +1174,6 @@ namespace FintasticFish.Web.Migrations
                     b.Navigation("Country");
 
                     b.Navigation("State");
-                });
-
-            modelBuilder.Entity("FintasticFish.Data.Entities.AquaSupplies", b =>
-                {
-                    b.HasOne("FintasticFish.Data.Entities.Measurement", "Mearsurement")
-                        .WithMany("AquaSupplies")
-                        .HasForeignKey("MearsurementId")
-                        .IsRequired()
-                        .HasConstraintName("FK_AquaSupplies_Measurements");
-
-                    b.HasOne("FintasticFish.Data.Entities.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Mearsurement");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.CustomerPhoneNumber", b =>
@@ -1376,17 +1298,9 @@ namespace FintasticFish.Web.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Foods_Measurements");
 
-                    b.HasOne("FintasticFish.Data.Entities.Supplier", "Supplier")
-                        .WithMany("Foods")
-                        .HasForeignKey("SupplierId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Food_Suppliers");
-
                     b.Navigation("FoodType");
 
                     b.Navigation("Mearsurement");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.Order", b =>
@@ -1479,17 +1393,9 @@ namespace FintasticFish.Web.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Plant_PlantTypes");
 
-                    b.HasOne("FintasticFish.Data.Entities.Supplier", "Supplier")
-                        .WithMany("Plants")
-                        .HasForeignKey("SupplierId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Plant_Suppliers");
-
                     b.Navigation("Mearsurement");
 
                     b.Navigation("PlantType");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.Supplier", b =>
@@ -1504,7 +1410,7 @@ namespace FintasticFish.Web.Migrations
                         .WithMany("Suppliers")
                         .HasForeignKey("SupplierTypeId")
                         .IsRequired()
-                        .HasConstraintName("FK_Suppliers_SupplierType");
+                        .HasConstraintName("FK_Suppliers_Suppliers");
 
                     b.Navigation("Country");
 
@@ -1571,8 +1477,6 @@ namespace FintasticFish.Web.Migrations
 
             modelBuilder.Entity("FintasticFish.Data.Entities.Measurement", b =>
                 {
-                    b.Navigation("AquaSupplies");
-
                     b.Navigation("Fish");
 
                     b.Navigation("Foods");
@@ -1603,10 +1507,6 @@ namespace FintasticFish.Web.Migrations
             modelBuilder.Entity("FintasticFish.Data.Entities.Supplier", b =>
                 {
                     b.Navigation("Fish");
-
-                    b.Navigation("Foods");
-
-                    b.Navigation("Plants");
                 });
 
             modelBuilder.Entity("FintasticFish.Data.Entities.SupplierType", b =>

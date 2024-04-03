@@ -1,11 +1,11 @@
-﻿@model IEnumerable<FintasticFish.Data.Entities.Food>
+﻿@model IEnumerable<FintasticFish.Data.Entities.Plant>
 
 @{
-    ViewData["Food"] = "Index";
+    ViewData["Plant"] = "Index";
 }
 
 <div class="gradient-header">
-    <h1 class="gradient-text">Fin-Tastic Foods</h1>
+    <h1 class="gradient-text">Fresh Water Plants</h1>
 </div>
 
 <p>
@@ -39,7 +39,7 @@
                 Sale End Date
             </th>
             <th>
-                Food Type
+                Plant Type
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Size)
@@ -60,10 +60,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                $@Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                $@Html.DisplayFor(modelItem => item.SalePrice)
+                @Html.DisplayFor(modelItem => item.SalePrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Taxable)
@@ -78,7 +78,7 @@
                 @Html.DisplayFor(modelItem => item.SaleEndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FoodType.Name)
+                @Html.DisplayFor(modelItem => item.PlantType.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Size)

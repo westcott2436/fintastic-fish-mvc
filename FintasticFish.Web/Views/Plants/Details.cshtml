@@ -1,4 +1,4 @@
-﻿@model FintasticFish.Data.Entities.Food
+﻿@model FintasticFish.Data.Entities.Plant
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Food</h4>
+    <h4>Plant</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -26,13 +26,13 @@
             @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd class = "col-sm-10">
-            $@Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Price)
         </dd>
         <dt class = "col-sm-2">
             Sale Price
         </dt>
         <dd class = "col-sm-10">
-            $@Html.DisplayFor(model => model.SalePrice)
+            @Html.DisplayFor(model => model.SalePrice)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Taxable)
@@ -59,16 +59,16 @@
             @Html.DisplayFor(model => model.SaleEndDate)
         </dd>
         <dt class = "col-sm-2">
-            Food Type
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FoodType.Name)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Size)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt class = "col-sm-2">
+            Plant Type
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlantType.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Mearsurement)

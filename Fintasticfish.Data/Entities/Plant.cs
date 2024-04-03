@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FintasticFish.Data.Entities;
 
-public partial class Food
+public partial class Plant
 {
     public int Id { get; set; }
 
@@ -15,25 +15,25 @@ public partial class Food
 
     public decimal SalePrice { get; set; }
 
-    public double Size { get; set; }
-
-    public string Description { get; set; }
-
     public bool Taxable { get; set; }
 
-    public int Stock { get; set; }
+    public bool Stock { get; set; }
 
-    public int SupplierId { get; set; }
+    public string Description { get; set; }
 
     public DateOnly SaleStartDate { get; set; }
 
     public DateOnly SaleEndDate { get; set; }
 
-    public int FoodTypeId { get; set; }
+    public int PlantTypeId { get; set; }
+    
+    public double Size { get; set; }
+
+    public int SupplierId { get; set; }
 
     public int MearsurementId { get; set; }
 
-    public virtual FoodType FoodType { get; set; }
+    public virtual PlantType PlantType { get; set; }
 
     public virtual Measurement Mearsurement { get; set; }
 
