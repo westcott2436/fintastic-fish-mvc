@@ -50,6 +50,7 @@ namespace FintasticFish.Web.Controllers
         {
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name");
             ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name");
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name");
             return View();
         }
 
@@ -58,7 +59,7 @@ namespace FintasticFish.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SupplierId,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +69,7 @@ namespace FintasticFish.Web.Controllers
             }
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
             ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", plant.SupplierId);
             return View(plant);
         }
 
@@ -86,6 +88,7 @@ namespace FintasticFish.Web.Controllers
             }
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
             ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", plant.SupplierId);
             return View(plant);
         }
 
@@ -94,7 +97,7 @@ namespace FintasticFish.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SupplierId,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
         {
             if (id != plant.Id)
             {
@@ -123,6 +126,7 @@ namespace FintasticFish.Web.Controllers
             }
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
             ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", plant.SupplierId);
             return View(plant);
         }
 
