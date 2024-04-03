@@ -11,7 +11,7 @@ public partial class FintasticFishContext : DbContext
 {
     //public FintasticFishContext()
     //{
-    ////WorkAround: Commented out for creating controllers.
+    //    //WorkAround: Commented out for creating controllers.
     //}
     public FintasticFishContext(DbContextOptions<FintasticFishContext> options)
         : base(options)
@@ -31,6 +31,8 @@ public partial class FintasticFishContext : DbContext
     public virtual DbSet<AggressionLevel> AggressionLevels { get; set; }
 
     public virtual DbSet<AggressionType> AggressionTypes { get; set; }
+
+    public virtual DbSet<AquaSupplies> AquaSupplies { get; set; }
 
     public virtual DbSet<Country> Countries { get; set; }
 
@@ -62,9 +64,9 @@ public partial class FintasticFishContext : DbContext
 
     public virtual DbSet<PhoneNumberType> PhoneNumbersTypes { get; set; }
 
-    public virtual DbSet<PhoneNumber> Plants { get; set; }
+    public virtual DbSet<Plant> Plants { get; set; }
 
-    public virtual DbSet<PhoneNumberType> PlantTypes { get; set; }
+    public virtual DbSet<PlantType> PlantTypes { get; set; }
 
     public virtual DbSet<State> States { get; set; }
 
@@ -137,6 +139,20 @@ public partial class FintasticFishContext : DbContext
                                                       new AggressionType { Id = 2, Name = "Social" },
                                                       new AggressionType { Id = 3, Name = "Time" },
                                                       new AggressionType { Id = 4, Name = "Temperature" });
+
+        modelBuilder.Entity<AquaSupplies>(entity =>
+        {
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+            entity.Property(e => e.Price).HasColumnType("smallmoney");
+            entity.Property(e => e.SalePrice).HasColumnType("smallmoney");
+
+            entity.HasOne(d => d.Mearsurement).WithMany(p => p.AquaSupplies)
+                .HasForeignKey(d => d.MearsurementId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AquaSupplies_Measurements");
+        });
 
         modelBuilder.Entity<Country>(entity =>
         {
@@ -271,6 +287,11 @@ public partial class FintasticFishContext : DbContext
                 .HasForeignKey(d => d.MearsurementId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Foods_Measurements");
+
+            entity.HasOne(d => d.Supplier).WithMany(p => p.Foods)
+               .HasForeignKey(d => d.SupplierId)
+               .OnDelete(DeleteBehavior.ClientSetNull)
+               .HasConstraintName("FK_Food_Suppliers");
         });
 
         modelBuilder.Entity<FoodType>(entity =>
@@ -494,7 +515,7 @@ public partial class FintasticFishContext : DbContext
             entity.HasOne(d => d.SupplierType).WithMany(p => p.Suppliers)
                 .HasForeignKey(d => d.SupplierTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Suppliers_Suppliers");
+                .HasConstraintName("FK_Suppliers_SupplierType");
         });
 
         modelBuilder.Entity<SupplierPhoneNumber>(entity =>

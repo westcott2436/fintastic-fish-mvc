@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FintasticFish.Data.Entities;
 
-public partial class Food
+public partial class AquaSupplies
 {
     public int Id { get; set; }
 
@@ -29,13 +29,10 @@ public partial class Food
 
     public DateOnly SaleEndDate { get; set; }
 
-    public int FoodTypeId { get; set; }
-
     public int MearsurementId { get; set; }
-
-    public virtual FoodType FoodType { get; set; }
 
     public virtual Measurement Mearsurement { get; set; }
 
     public virtual Supplier Supplier { get; set; }
-}
+
+ }

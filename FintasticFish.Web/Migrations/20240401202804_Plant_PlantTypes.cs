@@ -13,25 +13,9 @@ namespace FintasticFish.Web.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_PhoneNumbersTypes",
-                table: "PhoneNumbersTypes");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_PhoneNumbers",
-                table: "PhoneNumbers");
-
             migrationBuilder.RenameTable(
                 name: "SupplierPhoneNumber",
                 newName: "SupplierPhoneNumbers");
-
-            migrationBuilder.RenameTable(
-                name: "PhoneNumbersTypes",
-                newName: "PhoneNumberType");
-
-            migrationBuilder.RenameTable(
-                name: "PhoneNumbers",
-                newName: "PhoneNumber");
 
             migrationBuilder.RenameTable(
                 name: "CustomerPhoneNumber",
@@ -48,11 +32,6 @@ namespace FintasticFish.Web.Migrations
                 newName: "IX_SupplierPhoneNumbers_PhoneNumberId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_PhoneNumbers_PhoneNumberTypeId",
-                table: "PhoneNumber",
-                newName: "IX_PhoneNumber_PhoneNumberTypeId");
-
-            migrationBuilder.RenameIndex(
                 name: "IX_CustomerPhoneNumber_PhoneNumberId",
                 table: "CustomerPhoneNumbers",
                 newName: "IX_CustomerPhoneNumbers_PhoneNumberId");
@@ -62,18 +41,8 @@ namespace FintasticFish.Web.Migrations
                 table: "CustomerPhoneNumbers",
                 newName: "IX_CustomerPhoneNumbers_CustomerId");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_PhoneNumberType",
-                table: "PhoneNumberType",
-                column: "Id");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_PhoneNumber",
-                table: "PhoneNumber",
-                column: "Id");
-
             migrationBuilder.CreateTable(
-                name: "PlantType",
+                name: "PlantTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -82,11 +51,11 @@ namespace FintasticFish.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlantType", x => x.Id);
+                    table.PrimaryKey("PK_PlantTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Plant",
+                name: "Plants",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -104,7 +73,7 @@ namespace FintasticFish.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Plant", x => x.Id);
+                    table.PrimaryKey("PK_Plants", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Plant_Measurements",
                         column: x => x.MearsurementId,
@@ -113,12 +82,12 @@ namespace FintasticFish.Web.Migrations
                     table.ForeignKey(
                         name: "FK_Plant_PlantTypes",
                         column: x => x.PlantTypeId,
-                        principalTable: "PlantType",
+                        principalTable: "PlantTypes",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
-                table: "PlantType",
+                table: "PlantTypes",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
@@ -128,13 +97,13 @@ namespace FintasticFish.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plant_MearsurementId",
-                table: "Plant",
+                name: "IX_Plants_MearsurementId",
+                table: "Plants",
                 column: "MearsurementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plant_PlantTypeId",
-                table: "Plant",
+                name: "IX_Plants_PlantTypeId",
+                table: "Plants",
                 column: "PlantTypeId");
         }
 
@@ -142,30 +111,14 @@ namespace FintasticFish.Web.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Plant");
+                name: "Plants");
 
             migrationBuilder.DropTable(
-                name: "PlantType");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_PhoneNumberType",
-                table: "PhoneNumberType");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_PhoneNumber",
-                table: "PhoneNumber");
+                name: "PlantTypes");
 
             migrationBuilder.RenameTable(
                 name: "SupplierPhoneNumbers",
                 newName: "SupplierPhoneNumber");
-
-            migrationBuilder.RenameTable(
-                name: "PhoneNumberType",
-                newName: "PhoneNumbersTypes");
-
-            migrationBuilder.RenameTable(
-                name: "PhoneNumber",
-                newName: "PhoneNumbers");
 
             migrationBuilder.RenameTable(
                 name: "CustomerPhoneNumbers",
@@ -182,11 +135,6 @@ namespace FintasticFish.Web.Migrations
                 newName: "IX_SupplierPhoneNumber_PhoneNumberId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_PhoneNumber_PhoneNumberTypeId",
-                table: "PhoneNumbers",
-                newName: "IX_PhoneNumbers_PhoneNumberTypeId");
-
-            migrationBuilder.RenameIndex(
                 name: "IX_CustomerPhoneNumbers_PhoneNumberId",
                 table: "CustomerPhoneNumber",
                 newName: "IX_CustomerPhoneNumber_PhoneNumberId");
@@ -195,16 +143,6 @@ namespace FintasticFish.Web.Migrations
                 name: "IX_CustomerPhoneNumbers_CustomerId",
                 table: "CustomerPhoneNumber",
                 newName: "IX_CustomerPhoneNumber_CustomerId");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_PhoneNumbersTypes",
-                table: "PhoneNumbersTypes",
-                column: "Id");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_PhoneNumbers",
-                table: "PhoneNumbers",
-                column: "Id");
         }
     }
 }

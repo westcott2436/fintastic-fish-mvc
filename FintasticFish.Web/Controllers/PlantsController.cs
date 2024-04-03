@@ -9,23 +9,23 @@ using FintasticFish.Data.Entities;
 
 namespace FintasticFish.Web.Controllers
 {
-    public class FoodsController : Controller
+    public class PlantsController : Controller
     {
         private readonly FintasticFishContext _context;
 
-        public FoodsController(FintasticFishContext context)
+        public PlantsController(FintasticFishContext context)
         {
             _context = context;
         }
 
-        // GET: Foods
+        // GET: Plants
         public async Task<IActionResult> Index()
         {
-            var fintasticFishContext = _context.Foods.Include(f => f.FoodType).Include(f => f.Mearsurement);
+            var fintasticFishContext = _context.Plants.Include(p => p.Mearsurement).Include(p => p.PlantType);
             return View(await fintasticFishContext.ToListAsync());
         }
 
-        // GET: Foods/Details/5
+        // GET: Plants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,45 +33,45 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
 
-            var food = await _context.Foods
-                .Include(f => f.FoodType)
-                .Include(f => f.Mearsurement)
+            var plant = await _context.Plants
+                .Include(p => p.Mearsurement)
+                .Include(p => p.PlantType)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (food == null)
+            if (plant == null)
             {
                 return NotFound();
             }
 
-            return View(food);
+            return View(plant);
         }
 
-        // GET: Foods/Create
+        // GET: Plants/Create
         public IActionResult Create()
         {
-            ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name");
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name");
+            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name");
             return View();
         }
 
-        // POST: Foods/Create
+        // POST: Plants/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Size,Taxable,Description,Stock,SaleStartDate,SaleEndDate,FoodTypeId,MearsurementId")] Food food)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(food);
+                _context.Add(plant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name", food.FoodTypeId);
-            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", food.MearsurementId);
-            return View(food);
+            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
+            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
+            return View(plant);
         }
 
-        // GET: Foods/Edit/5
+        // GET: Plants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,24 +79,24 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
 
-            var food = await _context.Foods.FindAsync(id);
-            if (food == null)
+            var plant = await _context.Plants.FindAsync(id);
+            if (plant == null)
             {
                 return NotFound();
             }
-            ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name", food.FoodTypeId);
-            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", food.MearsurementId);
-            return View(food);
+            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
+            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
+            return View(plant);
         }
 
-        // POST: Foods/Edit/5
+        // POST: Plants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Size,Taxable,Description,Stock,SaleStartDate,SaleEndDate,FoodTypeId,MearsurementId")] Food food)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
         {
-            if (id != food.Id)
+            if (id != plant.Id)
             {
                 return NotFound();
             }
@@ -105,12 +105,12 @@ namespace FintasticFish.Web.Controllers
             {
                 try
                 {
-                    _context.Update(food);
+                    _context.Update(plant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FoodExists(food.Id))
+                    if (!PlantExists(plant.Id))
                     {
                         return NotFound();
                     }
@@ -121,12 +121,12 @@ namespace FintasticFish.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name", food.FoodTypeId);
-            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", food.MearsurementId);
-            return View(food);
+            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
+            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
+            return View(plant);
         }
 
-        // GET: Foods/Delete/5
+        // GET: Plants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,36 +134,36 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
 
-            var food = await _context.Foods
-                .Include(f => f.FoodType)
-                .Include(f => f.Mearsurement)
+            var plant = await _context.Plants
+                .Include(p => p.Mearsurement)
+                .Include(p => p.PlantType)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (food == null)
+            if (plant == null)
             {
                 return NotFound();
             }
 
-            return View(food);
+            return View(plant);
         }
 
-        // POST: Foods/Delete/5
+        // POST: Plants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var food = await _context.Foods.FindAsync(id);
-            if (food != null)
+            var plant = await _context.Plants.FindAsync(id);
+            if (plant != null)
             {
-                _context.Foods.Remove(food);
+                _context.Plants.Remove(plant);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FoodExists(int id)
+        private bool PlantExists(int id)
         {
-            return _context.Foods.Any(e => e.Id == id);
+            return _context.Plants.Any(e => e.Id == id);
         }
     }
 }

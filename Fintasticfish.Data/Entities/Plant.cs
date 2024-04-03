@@ -19,6 +19,8 @@ public partial class Plant
 
     public bool Stock { get; set; }
 
+    public string Description { get; set; }
+
     public DateOnly SaleStartDate { get; set; }
 
     public DateOnly SaleEndDate { get; set; }
@@ -26,10 +28,14 @@ public partial class Plant
     public int PlantTypeId { get; set; }
     
     public double Size { get; set; }
-    
+
+    public int SupplierId { get; set; }
+
     public int MearsurementId { get; set; }
 
     public virtual PlantType PlantType { get; set; }
 
     public virtual Measurement Mearsurement { get; set; }
+
+    public virtual Supplier Supplier { get; set; }
 }

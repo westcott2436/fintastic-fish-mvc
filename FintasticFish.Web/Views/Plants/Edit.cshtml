@@ -1,17 +1,18 @@
-﻿@model FintasticFish.Data.Entities.Food
+﻿@model FintasticFish.Data.Entities.Plant
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
-<h4>Food</h4>
+<h4>Plant</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -37,10 +38,10 @@
                     <input class="form-check-input" asp-for="Taxable" /> @Html.DisplayNameFor(model => model.Taxable)
                 </label>
             </div>
-            <div class="form-group">
-                <label asp-for="Stock" class="control-label"></label>
-                <input asp-for="Stock" class="form-control" />
-                <span asp-validation-for="Stock" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Stock" /> @Html.DisplayNameFor(model => model.Stock)
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="SaleStartDate" class="control-label">Sale Start Date</label>
@@ -53,8 +54,9 @@
                 <span asp-validation-for="SaleEndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FoodTypeId" class="control-label">Food Type</label>
-                <select asp-for="FoodTypeId" class ="form-control" asp-items="ViewBag.FoodTypeId"></select>
+                <label asp-for="PlantTypeId" class="control-label">Plant Type</label>
+                <select asp-for="PlantTypeId" class="form-control" asp-items="ViewBag.PlantTypeId"></select>
+                <span asp-validation-for="PlantTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
@@ -63,10 +65,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="MearsurementId" class="control-label">Mearsurement</label>
-                <select asp-for="MearsurementId" class ="form-control" asp-items="ViewBag.MearsurementId"></select>
+                <select asp-for="MearsurementId" class="form-control" asp-items="ViewBag.MearsurementId"></select>
+                <span asp-validation-for="MearsurementId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
