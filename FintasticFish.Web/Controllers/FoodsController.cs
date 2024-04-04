@@ -21,7 +21,9 @@ namespace FintasticFish.Web.Controllers
         // GET: Foods
         public async Task<IActionResult> Index()
         {
-            var fintasticFishContext = _context.Foods.Include(f => f.FoodType).Include(f => f.Mearsurement);
+            var fintasticFishContext = _context.Foods.Include(f => f.FoodType)
+                                                     .Include(f => f.Mearsurement)
+                                                     .Include(f => f.Supplier);
             return View(await fintasticFishContext.ToListAsync());
         }
 
@@ -36,6 +38,7 @@ namespace FintasticFish.Web.Controllers
             var food = await _context.Foods
                 .Include(f => f.FoodType)
                 .Include(f => f.Mearsurement)
+                .Include(f => f.Supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (food == null)
             {
@@ -141,6 +144,7 @@ namespace FintasticFish.Web.Controllers
             var food = await _context.Foods
                 .Include(f => f.FoodType)
                 .Include(f => f.Mearsurement)
+                .Include(f => f.Supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (food == null)
             {

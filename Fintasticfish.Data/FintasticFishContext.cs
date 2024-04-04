@@ -9,21 +9,21 @@ namespace FintasticFish.Data.Entities;
 
 public partial class FintasticFishContext : DbContext
 {
-    //public FintasticFishContext()
-    //{
-    //    //WorkAround: Commented out for creating controllers.
-    //}
+    public FintasticFishContext()
+    {
+        //WorkAround: Commented out for creating controllers.
+    }
     public FintasticFishContext(DbContextOptions<FintasticFishContext> options)
         : base(options)
     {
     }
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    //TODO Move connection string to a secure location
-    //    optionsBuilder.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        //TODO Move connection string to a secure location
+        optionsBuilder.UseSqlServer("Data Source=RAINBOW-PUKE\\SQLEXPRESS;Initial Catalog=FintasticFish; TrustServerCertificate=True; Integrated Security=SSPI;");
 
-    //    //WorkAround: Commented out for creating controllers.
-    //}
+        //WorkAround: Commented out for creating controllers.
+    }
     public virtual DbSet<Address> Addresses { get; set; }
 
     public virtual DbSet<AddressType> AddressTypes { get; set; }
