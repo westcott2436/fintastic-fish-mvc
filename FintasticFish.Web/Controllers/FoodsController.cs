@@ -49,6 +49,7 @@ namespace FintasticFish.Web.Controllers
         public IActionResult Create()
         {
             ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name");
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name");
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name");
             return View();
         }
@@ -58,7 +59,7 @@ namespace FintasticFish.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Size,Taxable,Description,Stock,SaleStartDate,SaleEndDate,FoodTypeId,MearsurementId")] Food food)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Size,Taxable,Description,Stock,SupplierId,SaleStartDate,SaleEndDate,FoodTypeId,MearsurementId")] Food food)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +68,7 @@ namespace FintasticFish.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name", food.FoodTypeId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", food.SupplierId);
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", food.MearsurementId);
             return View(food);
         }
@@ -85,6 +87,7 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
             ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name", food.FoodTypeId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", food.SupplierId);
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", food.MearsurementId);
             return View(food);
         }
@@ -94,7 +97,7 @@ namespace FintasticFish.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Size,Taxable,Description,Stock,SaleStartDate,SaleEndDate,FoodTypeId,MearsurementId")] Food food)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Size,Taxable,Description,Stock,SupplierId,SaleStartDate,SaleEndDate,FoodTypeId,MearsurementId")] Food food)
         {
             if (id != food.Id)
             {
@@ -122,6 +125,7 @@ namespace FintasticFish.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FoodTypeId"] = new SelectList(_context.FoodTypes, "Id", "Name", food.FoodTypeId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", food.SupplierId);
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", food.MearsurementId);
             return View(food);
         }
