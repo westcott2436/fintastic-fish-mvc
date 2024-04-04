@@ -9,25 +9,23 @@ using FintasticFish.Data.Entities;
 
 namespace FintasticFish.Web.Controllers
 {
-    public class PlantsController : Controller
+    public class AquaSuppliesController : Controller
     {
         private readonly FintasticFishContext _context;
 
-        public PlantsController(FintasticFishContext context)
+        public AquaSuppliesController(FintasticFishContext context)
         {
             _context = context;
         }
 
-        // GET: Plants
+        // GET: AquaSupplies
         public async Task<IActionResult> Index()
         {
-            var fintasticFishContext = _context.Plants.Include(p => p.Mearsurement)
-                                                      .Include(p => p.PlantType)
-                                                      .Include(f => f.Supplier);
+            var fintasticFishContext = _context.AquaSupplies.Include(a => a.Mearsurement).Include(a => a.Supplier);
             return View(await fintasticFishContext.ToListAsync());
         }
 
-        // GET: Plants/Details/5
+        // GET: AquaSupplies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,48 +33,45 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
 
-            var plant = await _context.Plants
-                .Include(p => p.Mearsurement)
-                .Include(p => p.PlantType)
-                .Include(f => f.Supplier)
+            var aquaSupplies = await _context.AquaSupplies
+                .Include(a => a.Mearsurement)
+                .Include(a => a.Supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (plant == null)
+            if (aquaSupplies == null)
             {
                 return NotFound();
             }
 
-            return View(plant);
+            return View(aquaSupplies);
         }
 
-        // GET: Plants/Create
+        // GET: AquaSupplies/Create
         public IActionResult Create()
         {
             ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name");
-            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name");
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name");
             return View();
         }
 
-        // POST: Plants/Create
+        // POST: AquaSupplies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SupplierId,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,SalePrice,Size,Description,Taxable,Stock,SupplierId,SaleStartDate,SaleEndDate,MearsurementId")] AquaSupplies aquaSupplies)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(plant);
+                _context.Add(aquaSupplies);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
-            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", plant.SupplierId);
-            return View(plant);
+            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", aquaSupplies.MearsurementId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", aquaSupplies.SupplierId);
+            return View(aquaSupplies);
         }
 
-        // GET: Plants/Edit/5
+        // GET: AquaSupplies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,25 +79,24 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
 
-            var plant = await _context.Plants.FindAsync(id);
-            if (plant == null)
+            var aquaSupplies = await _context.AquaSupplies.FindAsync(id);
+            if (aquaSupplies == null)
             {
                 return NotFound();
             }
-            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
-            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", plant.SupplierId);
-            return View(plant);
+            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", aquaSupplies.MearsurementId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", aquaSupplies.SupplierId);
+            return View(aquaSupplies);
         }
 
-        // POST: Plants/Edit/5
+        // POST: AquaSupplies/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Taxable,Description,Stock,SupplierId,SaleStartDate,SaleEndDate,PlantTypeId,Size,MearsurementId")] Plant plant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,SalePrice,Size,Description,Taxable,Stock,SupplierId,SaleStartDate,SaleEndDate,MearsurementId")] AquaSupplies aquaSupplies)
         {
-            if (id != plant.Id)
+            if (id != aquaSupplies.Id)
             {
                 return NotFound();
             }
@@ -111,12 +105,12 @@ namespace FintasticFish.Web.Controllers
             {
                 try
                 {
-                    _context.Update(plant);
+                    _context.Update(aquaSupplies);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlantExists(plant.Id))
+                    if (!AquaSuppliesExists(aquaSupplies.Id))
                     {
                         return NotFound();
                     }
@@ -127,13 +121,12 @@ namespace FintasticFish.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", plant.MearsurementId);
-            ViewData["PlantTypeId"] = new SelectList(_context.PlantTypes, "Id", "Name", plant.PlantTypeId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", plant.SupplierId);
-            return View(plant);
+            ViewData["MearsurementId"] = new SelectList(_context.Measurements, "Id", "Name", aquaSupplies.MearsurementId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "Id", "Name", aquaSupplies.SupplierId);
+            return View(aquaSupplies);
         }
 
-        // GET: Plants/Delete/5
+        // GET: AquaSupplies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -141,37 +134,36 @@ namespace FintasticFish.Web.Controllers
                 return NotFound();
             }
 
-            var plant = await _context.Plants
-                .Include(p => p.Mearsurement)
-                .Include(p => p.PlantType)
-                .Include(f => f.Supplier)
+            var aquaSupplies = await _context.AquaSupplies
+                .Include(a => a.Mearsurement)
+                .Include(a => a.Supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (plant == null)
+            if (aquaSupplies == null)
             {
                 return NotFound();
             }
 
-            return View(plant);
+            return View(aquaSupplies);
         }
 
-        // POST: Plants/Delete/5
+        // POST: AquaSupplies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var plant = await _context.Plants.FindAsync(id);
-            if (plant != null)
+            var aquaSupplies = await _context.AquaSupplies.FindAsync(id);
+            if (aquaSupplies != null)
             {
-                _context.Plants.Remove(plant);
+                _context.AquaSupplies.Remove(aquaSupplies);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlantExists(int id)
+        private bool AquaSuppliesExists(int id)
         {
-            return _context.Plants.Any(e => e.Id == id);
+            return _context.AquaSupplies.Any(e => e.Id == id);
         }
     }
 }

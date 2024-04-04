@@ -1,12 +1,10 @@
-﻿@model IEnumerable<FintasticFish.Data.Entities.Food>
+﻿@model IEnumerable<FintasticFish.Data.Entities.AquaSupplies>
 
 @{
-    ViewData["Food"] = "Index";
+    ViewData["Title"] = "Index";
 }
 
-<div class="gradient-header">
-    <h1 class="gradient-text">Fin-Tastic Foods</h1>
-</div>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,13 +16,13 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
                 Sale Price
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Taxable)
@@ -33,22 +31,19 @@
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Supplier)
-            </th>
-            <th>
                 Sale Start Date
             </th>
             <th>
                 Sale End Date
             </th>
             <th>
-                Food Type
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Size)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Mearsurement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
             </th>
             <th></th>
         </tr>
@@ -60,13 +55,13 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
                 $@Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 $@Html.DisplayFor(modelItem => item.SalePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Taxable)
@@ -75,22 +70,19 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.SaleStartDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SaleEndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FoodType.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Size)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Mearsurement.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.ContactName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

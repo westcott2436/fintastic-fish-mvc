@@ -1,4 +1,4 @@
-﻿@model FintasticFish.Data.Entities.Plant
+﻿@model FintasticFish.Data.Entities.AquaSupplies
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Plant</h4>
+    <h4>AquaSupplies</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -15,12 +15,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
@@ -35,6 +29,12 @@
             @Html.DisplayFor(model => model.SalePrice)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Taxable)
         </dt>
         <dd class = "col-sm-10">
@@ -45,12 +45,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Stock)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Supplier)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Supplier.Name)
         </dd>
         <dt class = "col-sm-2">
             Sale Start Date
@@ -64,23 +58,23 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.SaleEndDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Size)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt class = "col-sm-2">
-            Plant Type
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlantType.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Mearsurement)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Mearsurement.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Supplier)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Supplier.ContactName)
         </dd>
     </dl>
 </div>

@@ -63,10 +63,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                $@Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SalePrice)
+                $@Html.DisplayFor(modelItem => item.SalePrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Taxable)
@@ -75,7 +75,7 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier)
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SaleStartDate)
