@@ -41,4 +41,4 @@ Follow us on social media to stay updated on our latest arrivals, special offers
 
 - [Facebook](https://www.facebook.com/FintasticFishBellevue/)
 
-Thank you for visiting our website. We hope you find everything you're looking for and look forward to serving you soon.
+Thank you for visiting our website. We hope you find everything you're looking for and look forward to serving you soon!
