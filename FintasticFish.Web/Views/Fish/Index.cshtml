@@ -3,7 +3,7 @@
 @{
     ViewData["Fish"] = "Index";
 }
-
+<body class="fishBG">
 <div class="gradient-header">
     <h1 class="gradient-text">Fin-Tastic's Stock</h1>
 </div>
@@ -30,7 +30,7 @@
                                 <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
                                 <a asp-action="Delete" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
                             </div>
-                                <small class="text-muted">$@Html.DisplayFor(modelItem => fish.Price)</small>
+                                <small>$@Html.DisplayFor(modelItem => fish.Price)</small>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-
+</body>
 
 
 @* <table class="table">
