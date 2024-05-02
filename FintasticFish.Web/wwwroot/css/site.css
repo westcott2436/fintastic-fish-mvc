@@ -61,9 +61,9 @@ body {
 }
 .page-top-banner {
     font-family: Georgia, serif;
-    font-size: 12em;
+    font-size: 10em;
     text-align: center;
-    border-radius: .1em;
+    border-radius:.1em;
     background-image: linear-gradient(to right, yellow, yellow, red, yellow, yellow);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -88,16 +88,12 @@ body {
 }
 .fish-card-background {
     background: black;
+    color: white;
+    padding: .25em;
 }
-.logo-temp {
-    float: right;
-    width: 300px;
-    height: 180px;
-}
-.home-background {
-    background-image: url('/Images/Jack-Dempsey-Fish-1024x683.jpg');
-    background-size: cover;
-    background-attachment: fixed;
+.home-index img {
+    width: 10em;
+    height: 10em;
 }
 .social-link {
     display: inline-block;
@@ -127,4 +123,49 @@ body {
     flex: 1;
     margin: 0 10px;
     align-content: center;
+}
+.home-index {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Aligns items vertically in the middle */
+    margin: 1.5em;
+}
+
+.home-container {
+    display: grid;
+    justify-content:center;
+       
+}
+.outer-div {
+    background-color: darkblue;
+    border-radius: 1em;
+    margin-bottom: 4em;
+}
+.plantsBG {  
+    background-image: url('/Images/plantsBackground.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;  
+    background-position: center;
+    background-attachment: fixed;
+}
+.foodBG {
+    background-image: url('/Images/foodBackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+.fishBG {
+    background-image: url('/Images/fishBackground.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+.suppliesBG {
+    background-image: url('/Images/suppliesBackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
